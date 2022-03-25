@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .container {
   display: -webkit-box;
   display: -webkit-flex;
@@ -95,6 +99,21 @@
   background-color: transparent;
   font-size: 4vw;
   line-height: 5vw;
+}
+
+.text-span {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  mix-blend-mode: difference;
+}
+
+.unlinkedborder {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.link {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 991px) {
