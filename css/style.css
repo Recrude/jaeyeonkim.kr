@@ -59,6 +59,7 @@
 }
 
 body {
+  background-color: black;
   background-image: url(../images/jeju_beach.jpg);
   background-size: cover;          
   background-repeat: no-repeat;
@@ -154,4 +155,24 @@ body {
 .full-div{
   width: 100vw;
   height: 100vh;
+}
+.item {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+.itemimage{
+  width: 80px;
+}
+.new-order-badge{
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.new-order{
+  position: relative;
+  top: 30%;
+  left: 10%;
 }
