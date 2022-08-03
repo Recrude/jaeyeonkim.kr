@@ -1,0 +1,7 @@
+@font-face {
+  font-family: Pretendard;
+  src: url("../fonts/pretendard-black.otf") format("opentyple"), url("../fonts/pretendard-black.woff2") format("woff2"), url("../fonts/pretendard-black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+
+}
