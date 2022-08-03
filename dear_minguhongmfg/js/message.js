@@ -4,15 +4,7 @@ var message = [{
   a: '존경하는',
 }, {
   a: '민구홍 매뉴팩처링의',
-},{
-  a: '<img src="images/poster-trident.png">',
-  b: [
-    '제가 속했던',
-    '미대 밴드',
-    '트라이던트의',
-    '온라인 오디션 포스터',
-  ]
-},{
+}, {
   a: '최고경영자',
 }, {
   a: '민구홍',
@@ -340,7 +332,7 @@ var message = [{
 }, {
   a: '포스터도 만들고',
 }, {
-  a: '<img src="images/poster-trident.png">',
+  a: '<img src="images/poster-trident2.png">',
   b: [
     '제가 속했던',
     '미대 밴드',
@@ -515,7 +507,7 @@ var message = [{
     '당시에는',
     '친한 동네 주민',
     '이민지',
-    'aka',
+    'a.k.a.',
     '이름',
     '선배님',
   ]
@@ -572,7 +564,7 @@ var message = [{
 }, {
   a: '구홍을 뵙고 나눴던 대화가',
 }, {
-  a: '기억이 나네요.',
+  a: '기억나네요.',
   b: [
     '일찍 와도 된다고 하셔서',
     '그 이후부터',
@@ -647,7 +639,7 @@ var message = [{
     '제작하고',
   ]
 }, {
-  a: '<img src="images/poster-pigment.png">',
+  a: '<img src="images/poster-pigment.jpg">',
   b: [
     '홍익대학교',
     '도예유리과',
@@ -662,13 +654,13 @@ var message = [{
     '서로에게 소중한',
     '사이가 된',
     '이민지',
-    'aka',
+    'a.k.a.',
     '이름 님과',
     '그리드룸이라는',
     '팀을 구성하고.',
   ]
 }, {
-  a: '<img src="images/THHAv1.jpg">',
+  a: '<img src="images/THHAv1-2.jpg">',
   b: [
     '그리드룸의',
     '첫 기획전시',
