@@ -161,7 +161,7 @@ var message = [{
 }, {
   a: '디자인 교과서로',
 }, {
-  a: '<img src="images/design-seoul.png">',
+  a: '<img src="images/design-seoul2-min.png">',
   b: [
     '당시 서울시에서',
     '디자인 교육을',
@@ -304,7 +304,7 @@ var message = [{
 }, {
   a: '전시도 하고',
 }, {
-  a: '<img src="images/flow.jpg">',
+  a: '<img src="images/flow-min.jpg">',
   b: [
     '저의',
     '첫 전시 작품',
@@ -314,7 +314,7 @@ var message = [{
     '인터렉티브 설치물이였습니다.',
   ]
 }, {
-  a: '<img src="images/mycomputer.png">',
+  a: '<img src="images/mycomputer-min.png">',
   b: [
     '김한솔 교수님의',
     'visualreportseoul',
@@ -332,7 +332,7 @@ var message = [{
 }, {
   a: '포스터도 만들고',
 }, {
-  a: '<img src="images/poster-trident2.png">',
+  a: '<img src="images/poster-trident2-min.png">',
   b: [
     '제가 속했던',
     '미대 밴드',
@@ -340,14 +340,14 @@ var message = [{
     '온라인 오디션 포스터',
   ]
 }, {
-  a: '<img src="images/poster-archive.png">',
+  a: '<img src="images/poster-archive-min.png">',
   b: [
     '크리스 로 교수님의',
     '수업에서 제작한',
     '그래픽 아카이브 포스터',
   ]
 }, {
-  a: '<img src="images/poster-medialudens.png">',
+  a: '<img src="images/poster-medialudens-min.png">',
   b: [
     '안마노 교수님의',
     '수업에서 제작한',
@@ -356,7 +356,7 @@ var message = [{
 }, {
   a: '근사한 프로필 사진도 찍고',
 }, {
-  a: '<img src="images/profile.png">',
+  a: '<img src="images/profile-min.png">',
   b: [
     '본인은 사진을 안할거라고',
     '꾸준히 말하고 다니지만',
@@ -368,7 +368,7 @@ var message = [{
 }, {
   a: '공연도 하고...',
 }, {
-  a: '<img src="images/trident-001.jpeg">',
+  a: '<img src="images/trident-001-min.jpeg">',
   b: [
     '미대 밴드',
     '트라이던트의',
@@ -423,25 +423,25 @@ var message = [{
 }, {
   a: '많이 들어왔습니다.',
 }, {
-  a: '<img src="images/web-vr.png">',
+  a: '<img src="images/web-vr-min.png">',
   b: [
     '처음 제작한',
     '학과 코딩 소모임의',
     'VR 전시 웹부터',
   ]
 }, {
-  a: '<img src="images/web-siso.png">',
+  a: '<img src="images/web-siso-min.png">',
   b: [
     '2021년도',
     '시각디자인과 소모임 연합전시 웹',
   ]
 }, {
-  a: '<img src="images/web-wowff.png">',
+  a: '<img src="images/web-wowff-min.png">',
   b: [
     '학과 영상제 웹',
   ]
 }, {
-  a: '<img src="images/web-r777.png">',
+  a: '<img src="images/web-r777-min.png">',
   b: [
     '그리고',
     '2021년도 졸업전시 웹',
@@ -507,7 +507,7 @@ var message = [{
     '당시에는',
     '친한 동네 주민',
     '이민지',
-    'a.k.a.',
+    'aka',
     '이름',
     '선배님',
   ]
@@ -615,7 +615,7 @@ var message = [{
 }, {
   a: '많은 일들이 있었네요.',
 }, {
-  a: '<img src="images/newslettermockup.jpg">',
+  a: '<img src="images/newslettermockup2000-min.png">',
   b: [
     '재원 교수님의',
     '부름에 의해',
@@ -630,7 +630,7 @@ var message = [{
     '활동을 마치고',
   ]
 }, {
-  a: '<img src="images/m-smart-pot.png">',
+  a: '<img src="images/m-smart-pot-min.png">',
   b: [
     '산업디자인 스튜디오',
     'BKID에서',
@@ -639,7 +639,7 @@ var message = [{
     '제작하고',
   ]
 }, {
-  a: '<img src="images/poster-pigment.jpg">',
+  a: '<img src="images/poster-pigment-min.jpg">',
   b: [
     '홍익대학교',
     '도예유리과',
@@ -654,7 +654,7 @@ var message = [{
     '서로에게 소중한',
     '사이가 된',
     '이민지',
-    'a.k.a.',
+    'aka',
     '이름 님과',
     '그리드룸이라는',
     '팀을 구성하고.',
