@@ -23,7 +23,7 @@ preload([
     'images/mycomputer-min.png',
     'images/newslettermockup2000-min.png',
     'images/poster-archive-min.png',
-    'images/poster-medialudens-min.jpg',
+    'images/poster-medialudens-min.png',
     'images/poster-pigment-min.jpg',
     'images/poster-trident2-min.png',
     'images/profile-min.png',
