@@ -7,6 +7,32 @@ var sound_1 = new Howl({
 function color() {
   return '#' + Math.floor(Math.random() * 16777215).toString(2);
 }
+function preload(arrayOfImages) {
+    $(arrayOfImages).each(function(){
+        $('<img/>')[0].src = this;
+        // Alternatively you could use:
+        // (new Image()).src = this;
+    });
+}
+
+preload([
+    'images/design-seoul2-min.png',
+    'images/flow-min.jpg',
+    'images/gridroom_logo.svg',
+    'images/m-smart-pot-min.png',
+    'images/mycomputer-min.png',
+    'images/newslettermockup2000-min.png',
+    'images/poster-archive-min.png',
+    'images/poster-medialudens-min.jpg',
+    'images/poster-pigment-min.jpg',
+    'images/poster-trident2-min.png',
+    'images/profile-min.png',
+    'images/THHAv1-2-min.jpg',
+    'images/web-vr-min.png',
+    'images/web-r777-min.png',
+    'images/web-siso-min.png',
+    'images/web-wowff-min.png'
+]);
 
 function playA(count) {
   function duration(a) {
