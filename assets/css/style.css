@@ -1,0 +1,138 @@
+@font-face {
+  font-family: "suisse";
+  src: url("../webfont/SuisseIntl-Regular-WebM.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "suisse";
+  src: url("../webfont/SuisseIntl-Book-WebM.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "suisse";
+  src: url("../webfont/SuisseIntl-Medium-WebM.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font-weight: normal;
+  font-style: normal;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  font-size: 16px;
+}
+
+
+
+body {
+  font-family: suisse, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.35;
+  word-break: keep-all;
+  color: snow;
+  background-color: black;
+  cursor: default;
+}
+
+a {
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:hover,
+a.blink {
+  -webkit-animation: blink .8s step-start 0s infinite;
+  animation: blink .8s step-start 0s infinite;
+}
+
+@-webkit-keyframes blink {
+  50% {
+    color: blue;
+  }
+}
+
+@keyframes blink {
+  50% {
+    color: blue;
+  }
+}
+
+article {
+  max-width: 600px;
+  line-height: 1.2;
+  margin: 1.5rem;
+  margin-top: 0.8rem;
+}
+
+
+p {
+  padding-bottom: .5rem;
+}
+.indent {
+  text-indent: 3rem;
+}
+.inside-p {
+  padding-left: 3rem;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+.recent {
+  height: 8.5rem;
+  overflow: scroll;
+  position: relative;
+  z-index: 9;
+  margin-bottom: 2rem;
+  background: linear-gradient(transparent, black);
+
+}
+.more-text {
+  position:relative;
+  display:inline-block;
+}
+.more-text: {
+  content:'';
+  position: sticky;
+  left:0; top:0;
+  width:100%; height:8rem;
+  display:inline-block;
+  background: linear-gradient(transparent, black);
+  z-index: 5;
+}
+
+ol.alpha-order {
+  list-style-type: lower-alpha;
+}
+summary {
+  padding-top: 16px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  outline: 0;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary {
+  margin-bottom: 32px;
+}
