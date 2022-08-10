@@ -91,30 +91,25 @@ p {
 .inside-p {
   padding-left: 3rem;
   position: relative;
+  height: 8.5rem;
+  overflow: scroll;
   z-index: 1;
   margin-bottom: 1rem;
 }
 .recent {
-  height: 8.5rem;
-  overflow: scroll;
+  
   position: relative;
-  z-index: 9;
   margin-bottom: 2rem;
-  background: linear-gradient(transparent, black);
+}
 
-}
 .more-text {
-  position:relative;
-  display:inline-block;
-}
-.more-text: {
-  content:'';
-  position: sticky;
+  position: absolute;
   left:0; top:0;
-  width:100%; height:8rem;
+  width:100%; height:100%;
   display:inline-block;
-  background: linear-gradient(transparent, black);
+  background: linear-gradient(transparent, transparent, transparent, black);
   z-index: 5;
+  pointer-events: none;
 }
 
 ol.alpha-order {
