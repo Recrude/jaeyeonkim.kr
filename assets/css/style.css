@@ -115,7 +115,9 @@ p {
   position: relative;
   margin-bottom: 2rem;
 }
-
+.contact {
+  padding-left: 3rem;
+}
 .more-text {
   position: absolute;
   left:0; top:0;
