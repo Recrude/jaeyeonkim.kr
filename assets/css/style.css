@@ -52,7 +52,7 @@ body {
   font-family: suisse, sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.4;
   word-break: keep-all;
   color: snow;
   background-color: black;
@@ -85,7 +85,7 @@ a.blink {
 
 article {
   max-width: 600px;
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 1.5rem;
   margin-top: 0.8rem;
 }
