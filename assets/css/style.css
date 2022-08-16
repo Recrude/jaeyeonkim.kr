@@ -101,9 +101,14 @@ p {
   padding-left: 3rem;
   position: relative;
   height: 8.5rem;
-  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   z-index: 1;
   margin-bottom: 1rem;
+}
+.inside-p::-webkit-scrollbar {
+  display: none;
 }
 .recent {
   
