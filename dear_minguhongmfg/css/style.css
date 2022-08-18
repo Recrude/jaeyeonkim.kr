@@ -131,7 +131,9 @@ body {
   text-align: left;
   cursor: default;
 }
-
+body.is-loaded::before {
+  display: none;
+}
 h1,
 h2 {
   position: absolute;
