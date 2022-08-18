@@ -1,3 +1,16 @@
+$(window).on('load', function() {
+  var $body = $('body');
+  setTimeout(function() {
+    $body.addClass('is-loaded');
+    var $section = $('.section');
+    if($section) {
+      var top = $section.offset().top;
+      $('html, body').animate({
+        scrollTop: top
+      }, 500);
+    }
+  }, 1000);
+
 var sound_1 = new Howl({
   src: ['mp3/808kick2.mp3']
 }), sound_2 = new Howl({
