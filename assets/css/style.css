@@ -74,13 +74,15 @@ a.blink {
 
 @-webkit-keyframes blink {
   50% {
-    color: blue;
+    color: black;
+    -webkit-text-stroke: 1px white;
   }
 }
 
 @keyframes blink {
   50% {
-    color: blue;
+    color: black;
+    -webkit-text-stroke: 1px white;
   }
 }
 
