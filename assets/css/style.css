@@ -214,6 +214,7 @@ ul.ul-link{
   }
   .j-box{
     height: 10vh;
+    z-index: 1;
   }
 }
 
