@@ -211,7 +211,10 @@ ul.ul-link{
   position: fixed;
   top: 0.8rem;
   left: 1.5rem;
-}
+  }
+  .j-box{
+    height: 10vh;
+  }
 }
 
 .light {
