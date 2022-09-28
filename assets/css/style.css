@@ -16,7 +16,24 @@
   font-weight: 600;
   font-style: normal;
 }
-
+@font-face {
+  font-family: "braun";
+  src: url("../webfont/braun/braunlinear-light.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "braun";
+  src: url("../webfont/braun/braunlinear-bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "braun";
+  src: url("../webfont/braun/braunlinear-regular.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
 *,
 *::before,
 *::after {
@@ -49,9 +66,9 @@ html {
 
 
 body {
-  font-family: suisse, sans-serif;
+  font-family: braun, sans-serif;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.25;
   color: snow;
   background-color: black;
@@ -86,7 +103,7 @@ a.blink {
   50% {
     color: black;
     background-color: white;
-    border-radius: 4px;
+    border-radius: 2px;
     font-weight: 500;
     letter-spacing: -.1px;
   }
@@ -165,6 +182,7 @@ details[open] summary {
   margin-bottom: 32px;
 }
 button {
+  font-family: braun, sans-serif;
   line-height: 1;
   color: white;
   border: 2px solid white;
