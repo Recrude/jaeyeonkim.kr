@@ -3,27 +3,35 @@ let scale = 0.10; // Image scale (I work on 1080p monitor)
 let canvas;
 let ctx;
 let logoColor = 'grey';
-let imagesource = [];
-
+var images = [];
 function preload() {
-  for(let i = 0; i < preload.arguments.lenght; i++) {
-    images[i] = new Image();
-    images[i].src = preload.arguments.src;
-  }
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
 }
 
 preload(
-'webs/dearminguhong.png',
-'webs/gridroom.png',
-'webs/hivcdgw.png',
-'webs/neocity.png',
-'webs/unknownorder.png',
-'webs/newsletter.png',
-'webs/sisoze.png',
-'webs/thhav1.png',
-'webs/wowff.png'
+    'https://jaeyeonkim.kr/bouncing/webs/dearminguhong.png',
+'https://jaeyeonkim.kr/bouncing/webs/gridroom.png',
+'https://jaeyeonkim.kr/bouncing/webs/hivcdgw.png',
+'https://jaeyeonkim.kr/bouncing/webs/neocity.png',
+'https://jaeyeonkim.kr/bouncing/webs/unknownorder.png',
+'https://jaeyeonkim.kr/bouncing/webs/newsletter.png',
+'https://jaeyeonkim.kr/bouncing/webs/sisoze.png',
+'https://jaeyeonkim.kr/bouncing/webs/thhav1.png',
+'https://jaeyeonkim.kr/bouncing/webs/wowff.png'
 )
-
+const imagesource = [
+'https://jaeyeonkim.kr/bouncing/webs/dearminguhong.png',
+'https://jaeyeonkim.kr/bouncing/webs/gridroom.png',
+'https://jaeyeonkim.kr/bouncing/webs/hivcdgw.png',
+'https://jaeyeonkim.kr/bouncing/webs/neocity.png',
+'https://jaeyeonkim.kr/bouncing/webs/unknownorder.png',
+'https://jaeyeonkim.kr/bouncing/webs/newsletter.png',
+'https://jaeyeonkim.kr/bouncing/webs/sisoze.png',
+'https://jaeyeonkim.kr/bouncing/webs/thhav1.png',
+'https://jaeyeonkim.kr/bouncing/webs/wowff.png'];
 const randomwebs = imagesource[Math.floor(Math.random()*imagesource.length)];
 shuffle(imagesource);
 
