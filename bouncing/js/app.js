@@ -3,7 +3,16 @@ let scale = 0.10; // Image scale (I work on 1080p monitor)
 let canvas;
 let ctx;
 let logoColor = 'grey';
-const imagesource = [
+let imagesource = [];
+
+function preload() {
+  for(let i = 0; i < preload.arguments.lenght; i++) {
+    images[i] = new Image();
+    images[i].src = preload.arguments.src;
+  }
+}
+
+preload(
 'webs/dearminguhong.png',
 'webs/gridroom.png',
 'webs/hivcdgw.png',
@@ -12,7 +21,9 @@ const imagesource = [
 'webs/newsletter.png',
 'webs/sisoze.png',
 'webs/thhav1.png',
-'webs/wowff.png'];
+'webs/wowff.png'
+)
+
 const randomwebs = imagesource[Math.floor(Math.random()*imagesource.length)];
 shuffle(imagesource);
 
