@@ -12,6 +12,7 @@ body {
 }
 canvas {
     display: block;
+    transition: 1s;
 }
 input[type=range] {
    width:100%;
@@ -37,6 +38,7 @@ iframe {
     border: 1px solid white;
     border-radius: 8px;
     margin-right: 8px;
+    margin-top: 8px;
 }
 .button:hover {
     background-color: white;

@@ -40,10 +40,10 @@ function draw() {
   
   textSize(12);
 
-  text("Wave-Y: Size",(sliderWidth+20),35);
-  text("Wave-Y: X-Offset",(sliderWidth+20),65);
-  text("Wave-Y: Y-Offset",(sliderWidth+20),95);    
-  text("Wave-Y: Speed",(sliderWidth+20),125);    
+  text("Size",(sliderWidth+20),35);
+  text("X-Offset",(sliderWidth+20),65);
+  text("Y-Offset",(sliderWidth+20),95);    
+  text("Speed",(sliderWidth+20),125);    
   
   // Connect the slider values to the wave variables
   yWaveSize = yWaveSizeSlider.value();

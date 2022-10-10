@@ -49,10 +49,10 @@ function draw() {
   textSize(12);
   fill(255);
 
-  text("Wave-Y: Size",(sliderWidth+20),35);
-  text("Wave-Y: Length",(sliderWidth+20),65);
-  text("Wave-Y: Offset",(sliderWidth+20),95);    
-  text("Wave-Y: Speed",(sliderWidth+20),125);    
+  text("Size",(sliderWidth+20),35);
+  text("Length",(sliderWidth+20),65);
+  text("Offset",(sliderWidth+20),95);    
+  text("Speed",(sliderWidth+20),125);    
 
   // Connect the slider values to the wave variables
   yWaveSize = yWaveSizeSlider.value();
@@ -122,3 +122,6 @@ function draw() {
     }
   }
 }
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }

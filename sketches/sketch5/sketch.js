@@ -30,13 +30,13 @@ function setup() {
   createP();
   recsSlider = createSlider(3,200,70);
   let numberWords = createElement('numberWords',"# of rectangles");
-  numberWords.position(15,40);
+  numberWords.position(12,40);
   sizeSlider = createSlider(5,70,30);
   let sizeWords = createElement('sizeWords',"size of rectangles");
   sizeWords.position(150,40);
   intervalsSlider = createSlider(10,50,20);
   let intervalsWords = createElement('intervalsWords',"size of intervals");
-  intervalsWords.position(280,40);
+  intervalsWords.position(290,40);
   let refreshWords = createElement('refreshWords',"Click to refresh.  's' for a jpg.");
   refreshWords.position(12,85);
   newCanvas();
@@ -215,4 +215,7 @@ function keyTyped() {
   if (key === "s") {
     save("myCanvas.jpg");
   }
+}
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }

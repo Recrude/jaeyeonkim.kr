@@ -1,19 +1,28 @@
-const margin = 50;
+const margin = 30;
 let strokeConst;
 
 function setup() {
-  createCanvas(600, 800);
+    createCanvas(windowWidth, windowHeight-100);
   //noLoop();
 
   strokeConstSlider = createSlider(0, PI, 0.2, 0.01);
   strokeConstSlider.position(10, 20);
   strokeConstSlider.style("width", "100px");
+  let strokeWords = createElement('Strokewords',"Stroke Weight");
+  strokeWords.position(120,20);
+  frameSlider = createSlider(1, 60, 20);
+  frameSlider.position(10, 50);
+  frameSlider.style("width", "100px");
+  let frameWords = createElement('Framewords',"Frames");
+  frameWords.position(120,50);
+
 }
 
 function draw() {
- 
+    frameConst = frameSlider.value();
+    frameRate(frameConst);
+
   background(0);
-  text("Stroke Weight",120,35);
   stroke(255);
   noFill();
   rect(margin, margin, width - margin * 2, height - margin * 2);
@@ -41,4 +50,7 @@ function drawLine(lineY) {
     prevY = y;
   }
   
+}
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
