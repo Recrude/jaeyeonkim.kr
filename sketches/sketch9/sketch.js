@@ -19,7 +19,7 @@ function setup() {
     h = height; 
       
     push();
-    translate(0, h / 5);
+    translate(0, h /5+200);
     let num = 1000;
     for (let a = 0; a < num; a = a + 1) {
       let x = a * width / num;
