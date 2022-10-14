@@ -358,7 +358,7 @@ hr + .slide [data-tooltip]:hover:after {
 }
 iframe {
   width: 90vw;
-  height: 85vh;
+  height: 80vh;
   loading: "lazy";
 }
 .caption {
@@ -368,4 +368,8 @@ iframe {
 iframe #newsletter {
   width: 50vw;
   height: 80vh;
+}
+img {
+  max-height: 70vh;
+  width: auto;
 }
