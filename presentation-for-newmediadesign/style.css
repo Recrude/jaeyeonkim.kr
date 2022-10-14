@@ -187,7 +187,7 @@ hr + .slide {
   overflow-y: auto;
   padding: 1em;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 800;
   text-align: center;
   -webkit-animation: fade 1s;
   animation: fade 1s;
