@@ -16,7 +16,6 @@
   font-weight: 600;
   font-style: normal;
 }
-
 *,
 *::before,
 *::after {
@@ -241,5 +240,8 @@ ul.ul-link{
   .j-box{
     height: 10vh;
     z-index: 1;
+  }
+  button {
+    border:1px solid;
   }
 }
