@@ -1,57 +1,67 @@
-<html>
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="김재연">
-    <meta name="keywords" content="김재연, Kim Jaeyeon, Jaeyeon Kim">
-    <meta itemprop="name" content="김재연">
-    <meta itemprop="description" content="김재연">
-    <meta itemprop="image" content="assets/images/og-image.jpg">
-    <meta property="og:url" content="https://jaeyeonkim.kr">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="김재연">
-    <meta property="og:description" content="김재연">
-    <meta property="og:image" content="assets/images/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="김재연">
-    <meta name="twitter:description" content="김재연">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
-    <link rel="manifest" href="../assets/favicons/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#2b5797">
-    <meta name="theme-color" content="white">
-        <title>Bouncing DVD Logo</title>
-        <style>
-            * {margin:0; padding: 0;}
-            * {
-            }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Post-Optimal Website</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+      <div class="img-1 img"></div>
+      <div class="img-2 img"></div>
+      <div class="img-3 img"></div>
+      <div class="img-4 img"></div>
+      <div class="img-5 img"></div>
+      <div class="img-6 img"></div>
+    <section class="section1">
+      <div class="container">
+        <h1 class="center">Post-Optimal Models</h1>
+      </div>
+    </section>
+    <section class="section2">
+      <h1>정류장: 탈-최적화된 모델들
+        <br>Post-Optimal Models at Rectify Zone</h1>
+      <p>주위의 모든 상황이 우리에게 최적의 상황으로 적응되고 최적화되고 있는 상황 속 우리는 시스템이 의도한 구조 속에 들어가도록 유도된다. 기술 단계의 복잡성이 커지며 점차 거리감을 느끼고 주체적으로 활용하기 어려워한다. 기술은 점차 정교해지며 우리 삶에 더욱 다차원적인 먼 거리감의 편리함을 제공하며 의도된 구조 속에서 의도된 의미와 가치를 향유하도록 유도한다.<br>
+        <br>
+      이러한 사회 속에서 우리는 당연하게 여기는 기술에 대한 쓰임을 그 어느 때보다 비판적으로 관찰해보야한다. 당위성의 부여는 정답이 무엇인가에 대한 논의로 넘어가기도 전에 담론의 가능성을 제한시킨다. 이는 현재 당연하게 여기는 기술에 물음을 가지고 질문을 던지는 행위로부터 시작한다.<br>
+        <br>
+      《정류장》은 기술 매체의 담론 형성을 위해, 앤서니 던의 저서 『헤르츠 이야기』에서 고안한 개념인 탈-최적화된 사물로서의 디자인의 개념과 디자인픽션에서 수행적 프로토타입의 개념을 가져온다. 각 프로토타입들은 현재 기술에 질문을 갖고 낯설게 바라보며 상상을 기반으로 한 구조를 비판하는 형태를 취한다. 과정에서 기술의 단계를 줄인 낮은 단계의 기술의 방식에 집중하고 다차원화된 기술의 구조를 해부하여 드러낸다. 전기 신호의 흐름을 바꾸는 정류 과정과 같이, 기술 물체를 바라보는 흐름을 전환한다. 앤서니 던이 전자기적 제품의 가능성을 몇가지 무용해보이는 프로토타입으로 의미의 저편을 넓힌 것과 같이, 현 시대 속에서 대두되는 기술들에 대한 가정을 바탕으로 가능성을 탐구하고 수행적인 프로토타입을 제안하며 기술 구조 속에서 잠시 멈춰 바라볼 수 있는 공간을 구현한다.</p>
+    </section>
+    <script>
+      const img1 = document.querySelector(".img-1");
+      const img2 = document.querySelector(".img-2");
+      const img3 = document.querySelector(".img-3");
+      const img4 = document.querySelector(".img-4");
+      const img5 = document.querySelector(".img-5");
+      const img6 = document.querySelector(".img-6");
 
-            @media only screen and (max-width: 600px) {
-              canvas {
-                transform: scale(1.0);
-              }
-              #dvd {
-                transform: scale(0.5);
-              }
-            }
-            #box {
-                display: block;
-                border: 1px solid;
-            }
-        </style>
-    </head>
-
-    <body>
-
-        <!-- <canvas id="tv-screen"></canvas> -->
-
-<script src="js/p5.min.js"></script>
-<!-- <script src="js/sketch.js"></script> -->
-<script src="js/app.js"></script>
-
-<script src="js/jquery.min.js"></script>
-
-</body>
+      document.addEventListener("mousemove", e => {
+        img1.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+        img2.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+        img3.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+        img4.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+        img5.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+        img6.setAttribute(
+          "style",
+          "top :" + (e.pageY - 225) + "px; left: " + (e.pageX - 200) + "px"
+        );
+      });
+    </script>
+  </body>
 </html>
