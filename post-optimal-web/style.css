@@ -34,7 +34,16 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+h1 {
+  font-size: 3rem;
+  line-height: 1.4;
+}
 
+hr {
+  border: 0.25vw solid black;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 .center{
   margin: 0;
   position: absolute;
@@ -97,8 +106,8 @@ section {
   padding: 2rem;
   display: block;
   width: 100vw;
-  height: 100vh;
   background-color: white;
+  margin-bottom: 2rem;
 }
 .section1 {
   background-color: black;
@@ -112,11 +121,56 @@ section {
   margin-top: 100vh;
   background-color: white;
   z-index: 2;
-  display: flex;
-  flex-direction: row;
+  border: 0.5vw solid black;
+  width: 90vw;
+  margin-left: 5vw;
 }
 .section2 h1 {
   max-width: calc(100vw / 3);
 }
+.footer {
+  width: 89vw;
+  height: 20vw;
+  margin-left: -2rem;
+  z-index: 2;
+  background-color: black;
+}
 
+p {
+  max-width: 60%;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  background-size: contain;
+}
+.flex2 {
+  
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  justify-content: space-between;
+}
 
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+  .flex2 {
+    flex-direction: column;
+    width: 100%;
+  }
+  p {
+    max-width: 100%;
+  }
+  h1 {
+    width: 100%;
+  }
+  .img {
+    width: 300px;
+  }
+}
