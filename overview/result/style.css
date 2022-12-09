@@ -1,0 +1,149 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+    font-weight: bold;
+    font-style: normal;
+}
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+body{
+
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  
+}
+
+html {
+    font-size: 16px;
+}
+article {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+  word-break: keep-all;
+  background-image: url("../images/dall-e1.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: darkred;
+
+}
+.row-article {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.item-div {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  border: 1px solid;
+  cursor: help;
+  transition: 0.5s;
+}
+.item-div:hover {
+  background-color: blue;
+}
+
+.item-div h2 {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: .75rem;
+  font-size: 2.5vw;
+  font-weight: bold;
+  line-height: 1.375;
+  text-align: center;
+}
+
+.message {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  background-color: red;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.2;
+}
+
+.message p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: .75rem;
+  font-size: 10vw;
+  font-weight: bold;
+  line-height: 1.375;
+  word-break: keep-all;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+
+  .row-article{
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .item-div {
+    height: 100%;
+  }
+  .item-div h2 {
+    font-size: 6vw;
+  }
+
+
+}

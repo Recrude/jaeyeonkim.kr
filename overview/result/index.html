@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Imagine Phrases</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<!-- cdn을 통한 pretendard font 활성화를 위한 코드입니다. -->
+	<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+	<!-- adobe font를 통한 ag 최정호 screen font 활성화를 위한 스크립트입니다.  -->
+	<script>
+	  (function(d) {
+	    var config = {
+	      kitId: 'dpu3tmk',
+	      scriptTimeout: 3000,
+	      async: true
+	    },
+	    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	  })(document);
+	</script>
+</head>
+<body>
+	<article></article>
+	<!-- <img src="../images/dall-e1.png"> -->
+
+	<div class="message"><p></p></div>
+
+	<script src="../howler.min.js"></script>
+	<script src="../jquery.min.js"></script>
+	<script>
+	$(window).on('load', function() {
+	  $('.message').children('p').text('A Portrait Painting').delay(600).fadeOut(300, function() {
+	    $(this).text('of a Person').show().delay(500).fadeOut(300, function() {
+	      $(this).text('Wearing a Turban').show().delay(500).fadeOut(300, function() {
+	        $(this).text('and a Pearl Earring').show().delay(1000).fadeOut(600, function() {
+	          $(this).parent().fadeOut(800, function() {
+	            setTimeout(function() {
+	              $('.button').removeAttr('disabled');
+	            }, 800);
+	          });
+	        });
+	      });
+	    });
+	  });
+	});
+	</script>
+</body>
+</html>
