@@ -58,6 +58,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 html {
@@ -67,6 +68,7 @@ html {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background-color: #141414;
 }
 
 body { 
@@ -81,6 +83,7 @@ body {
   perspective: 1rem;
   opacity: 0;
   padding: 1rem;
+  overflow-y: hidden;
 }
 
 body.is-loaded {
@@ -105,8 +108,8 @@ box-shadow: 0px 0px 9px 1px rgba(82,82,82,0.35);
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 740px;
+  width: 25rem;
+  height: 37rem;
   perspective: 1400px;
 }
 
@@ -159,7 +162,7 @@ box-shadow: 0px 0px 9px 1px rgba(82,82,82,0.35);
     position: absolute;
     z-index: 999;
     width:20rem;
-    height:10rem;
+    height:auto;
       -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -186,12 +189,13 @@ iframe {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background: #141414;
   border: 1px solid snow;
-  font-size: 3rem;
+  font-size: 2rem;
+  text-align: center;
   z-index: 99;
 /*  box-shadow:  10px 10px 20px #0b0b0b,
                -10px -10px 20px #1d1d1d;
@@ -200,6 +204,15 @@ iframe {
   transition: 0.5s;
 }
 .formbutton:active{
-  background: #0b0b0b;
+  background: snow;
 }
 
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+
+
+
+}
