@@ -210,7 +210,12 @@ iframe {
 
 @media only screen and (max-width: 600px) {
   html {
-    font-size: 12px;
+    font-size: 14px;
+  }
+  .scene {
+    width: 30rem;
+    height: 44.4rem;
+    perspective: 1400px;
   }
 
 
