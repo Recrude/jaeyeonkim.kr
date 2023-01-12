@@ -5,38 +5,137 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>잠시 다녀옵니다.</title>
 	<style>
-		#d-day{text-align: center; margin: 30px;}
+	.comment {
+      width: 30%;
+      float: left;
+      background-color: rgb(241, 241, 241);
+      height: 500px;
+      overflow: scroll;
+  	}
 	</style>
+	<!-- cdn을 통한 pretendard font 활성화를 위한 코드입니다. -->
+	<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- adobe font를 통한 ag 최정호 screen font 활성화를 위한 스크립트입니다.  -->
+	<script>
+	  (function(d) {
+	    var config = {
+	      kitId: 'dpu3tmk',
+	      scriptTimeout: 3000,
+	      async: true
+	    },
+	    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	  })(document);
+	</script>
 </head>
 <body>
-	<div id="d-day"></div>
+	<header>
+	<a title="전역까지 남은 날"><h1 id="remain-time"></h1></a>
+	</header>
+	<hr>
+	<header>
+	<a title="훈련소 수료까지 남은 날"><h1 id="remain-time2"></h1></a>
+	</header>
+	<hr>
+	<details>
+		<summary><h2>재연에게 편지를 쓰고 싶다면...<h2></summary>
+		<article class="div2">
+	<div class="full-div">
+		<h2>인터넷 편지 작성 방법(2월 8일부터 작성 가능)</h2>
+		<p>
+			<ol>
+				<li><a href="https://www.edunavy.mil.kr:10003/themes/basic/sub2/4_5.jsp" target="_blank">해군교육사령부 인터넷 편지 웹사이트</a> 방문</li>
+				<li>약관 동의 후, 편지쓰기 버튼 클릭</li>
+				<li>아이핀/휴대폰으로 본인인증</li>
+				<li>인증 후, 받는이: 김재연 / 생년월일: 990713 입력 후 편지쓰기 버튼 클릭</li>
+				<li>배치 결과에서 김재연 클릭</li>
+				<li>인터넷 편지쓰기(중도에 날아갈 수 있으니 미리 작성 후 복붙 권장)</li>
+				<li>보내기 클릭 후, “등록되었습니다.” 문구 확인하기</li>
+			</ol>
+		</p>
+		<h2>유의사항</h2>
+		<p>
+			<ul>
+				<li>본인에게만 전달되고 공개되지 않음</li>
+				<li>하루 1인 1회 1000자 작성 가능</li>
+				<li>하루에 4명에게만 받을 수 있음</li>
+				<li>편지는 30분 이내에 작성해야 함(시간 초과시 지워짐)</li>
+				<li>당일 오후 3시까지의 편지가 오후 9시에 전달</li>
+				<li>재연에게 손편지 답장을 받고 싶다면 본인 주소와 우편번호를 적어주세요.</li>
+			</ul>
+		</p>
+	</div>
+	<div class="full-div">
+		<h2>손편지 발송 방법(2월 8일부터 주소 확인 가능)</h2>
+		<p>
+			<ol>
+				<li><a href="https://www.edunavy.mil.kr:10003/index.jsp" target="_blank">해군교육사령부 홈페이지</a> 접속</li>
+				<li>입영장병코너 > 훈련병 페이지</li>
+				<li>소대배치 훈련병 / 990713 / 김재연 검색</li>
+				<li>나온 주소 빈칸에 붙여놓고 우편봉투 작성</li>
+				<li>주소: 경상남도 창원시 진해구 진희로 111 사서함 211-2-3기초군사교육단신병교육대대 689기 00대대 00중대 00소대 김재연 (우)51686</li>
+				<li>무게에 맞는 우표/라벨 붙이고 발송</li>
+			</ol>
+		</p>
+		<h2>유의사항</h2>
+		<p>
+			<ul>
+				<li>되도록 규격봉투 + 규격 편지지로</li>
+				<li>규격 내 종류별 우편 가격
+					<ul>
+						<li>일반우편(2~5일): 400원~450원</li>
+						<li>등기통상(1~4일): 2500~2550원</li>
+						<li>일일특급(1일): 3500~3550원</li>
+					</ul>
+				<li>편지 외의 내용물은 절대 발송 불가</li>
+				<li>우표 부착 유의</li>
+			</ul>
+		</p>
+	</div>
+	</article>
+	</details>
+	<hr>
+	<div class="comment">
+        <table class="output2"></table>
+        <div id="input">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name">
 
+            <label for="comment">하고 싶은 말</label>
+            <input type="text" id="comment" name="comment">
 
-
+            <button id="google-submit">입력</button>
+            
+        </div>
+    </div>
+	<div id="snackbar"></div>
+	<!-- <div>
+		<label for="name">이름</label>
+		<input type="text" id="name" name="name">
+	  </div>
+	  <div>
+		<label for="age">나이</label>
+		<input type="number" id="age" name="age" min="1">
+	  </div>
+	  <div>
+		<label for="area">사는곳</label>
+		<input type="text" id="area" name="area">
+	  </div>
+	  <div>
+		<button id="google-submit">입력</button>
+	  </div> -->
+	  
+	
+	<script src="./jquery.min.js"></script>
+	<script src="./jquery.multilingual.min.js"></script>
+	<script src="./comment.js"></script>
+	<script src="./list.js"></script>
 	<script>
-	//디데이 종료 일자 설정 - 기본 6월 30일로 설정
-	var countDownDate = new Date("8 27, 2023 24:00:00").getTime();
-
-	//1초마다 갱신되도록 함수 생성,실행 
-	var x = setInterval(function() {
-	// 오늘 날짜 등록 
-	var now = new Date().getTime(); // 현재 날짜의 밀리초 계산
-	// 종료일자에서 현재일자를 뺀 시간
-	var distance = countDownDate - now;
-	// 각 변수에 일, 시, 분, 초를 등록
-	var d = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var s = Math.floor((distance % (1000 * 60)) / 1000);
-
-	if(d === 0) {
-	d = "DAY";
-	}
-
-	// 화면에 삽입
-	document.getElementById("d-day").innerHTML = "디데이까지 " + d +"일 " + h + "시간 " + m + "분 " + s + "초 남았습니다.";
-
-	}, 1000);
+	
 	</script>
+	<script src="./script.js">
+	</script>
+	
 </body>
 </html>
