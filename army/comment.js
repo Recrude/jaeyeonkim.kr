@@ -40,10 +40,10 @@ $('#google-submit').click(function () {
 
   $.ajax({
     type: "GET",
-    url: "https://script.google.com/macros/s/AKfycbyJscBR91NuZNEYjXG7276fwckxUKH3XvmVkGpPRaKosV_oU_ymNZRXOwk_nRBmgP7ZpQ/exec",
+    url: "https://script.google.com/macros/s/AKfycbw1CJtuLvNapDCSIQNmyvYZBTYdBIUP3K6BSeMMJoPikWXT1jWOni-SC5cWWTpn2fQUCg/exec",
     data: {
       "이름": inputName.val(),
-      "내용": inputComment.val(),
+      "하고 싶은 말": inputComment.val()
       //   "사는곳": inputArea.val()
     },
     success: function (response) {

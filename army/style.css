@@ -100,11 +100,11 @@ body{
     font-family: sm3-sj-gothic2, sans-serif;
     letter-spacing: -.08rem;
 /*    word-spacing: -.2rem;*/
-    line-height: 1.6;
+    line-height: 1.65;
     text-align: left;
     font-style: normal;
     word-break: keep-all;
-    background-color: snow;
+    background-color: white;
     padding: 2vw;
 }
 
@@ -113,30 +113,24 @@ h1 {
     font-size: 2rem;
     line-height: 1.2;
 }
-#remain-time {
+.selected {
+  background-color: navy;
+  color: white;
+  transition: 0.5s;
+}
+.counter {
   text-align: right;
   font-family: SuisseMono;
-    font-weight: 400;
-    font-size: 13.3vw;
-    letter-spacing: -0.8vw;
-    padding-right: 1.5vw;
+  font-weight: 400;
+  font-size: 13.3vw;
+  letter-spacing: -0.8vw;
+  padding-right: 1.5vw;
 }
-#remain-time:hover {
+.counter:hover {
   background-color: navy;
   color: white;
 }
-#remain-time2 {
-  text-align: right;
-  font-family: SuisseMono;
-    font-weight: 400;
-    font-size: 13.3vw;
-    letter-spacing: -0.8vw;
-    padding-right: 1.5vw;
-}
-#remain-time2:hover {
-  background-color: navy;
-  color: white;
-}
+
 h2 {
   font-family: sm3-t-gothic, sans-serif;
     font-weight: bold;
@@ -152,6 +146,9 @@ p {
 ul, ol {
   padding-left: 2.3rem;
   font-size: 1.5rem;
+}
+ul {
+  list-style: square;
 }
 .nostyle {
     list-style: none;
@@ -175,14 +172,28 @@ a {
   text-decoration-style: dotted;
   text-decoration-thickness: .1rem;
   text-underline-position: under;
+  cursor: pointer;
 }
 a:hover {
   color: navy;
   transition: .3s;
 }
 
-
-
+em {
+  background-color: navy;
+  color: white;
+  font-style: normal;
+}
+button {
+  padding: 0.5rem 1rem;
+  border: 1px solid navy;
+  background-color: white;
+  transition: 0.5s;
+}
+button:hover {
+  background-color: navy;
+  color: white;
+}
 article,
 aside,
 figure,
@@ -198,11 +209,22 @@ section {
   flex-direction: row;
   gap: 2rem;
 }
+.div22 {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 .full-div {
   width: 100%;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
-
+.divpadding {
+  padding: 1rem;
+  width: 100%;
+}
+.dashed {
+  border: .2vw dashed black;
+}
 summary {
     display: flex;
     flex-direction: row;
@@ -227,50 +249,92 @@ details summary::-webkit-details-marker {
   body {
     padding: 3vw;
   }
-#remain-time {
-    font-size: 13vw;
-    letter-spacing: -0.8vw;
-}
-#remain-time2 {
-    font-size: 13vw;
-    letter-spacing: -0.8vw;
-}
-summary h2 {
-    font-size: 3rem;
-}
-.div2 {
-  flex-direction: column;
-}
-#slide1 {
-  flex-direction: column;
-  padding: 1.5rem;
-}
-nav {
-  width: 100%;
-  height: 40%;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0;
+  .counter {
+      font-size: 19vw;
+      text-align: center;
+      letter-spacing: -0.8vw;
+  }
+  header h1{
+    line-height: 1.1;
+    padding: 3vw 0;
+  }
+  hr {
+    border: .5vw solid;
+  }
+
+  summary h2 {
+      font-size: 3rem;
+  }
+  .div2 {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
 }
 
-a {
-  display: inline;
+.comment {
+  width: 100%;
+  background-color: inherit;
+  font-size: 1.5rem;
+  
+}
+.output tr td:nth-child(1),
+.output tr:nth-child(1) {
+    color: var(--main);
+    width: 2.5rem;
+    border-bottom: 1px dashed navy;
 }
 
-iframe {
-  width: 100%;
-  height: 89vh;
-  margin: 0;
-  word-spacing: -.1rem;
+tr td:nth-child(2),
+tr:nth-child(2) {
+    width: 20rem;
+    border-bottom: 1px dashed navy;
 }
-.mobilenav {
-  display: block;
-  width: 85%;
+
+tr td:nth-child(3),
+tr:nth-child(3) {
+    width: 0rem;
+    border-bottom: 1px dashed navy;
 }
-.column1 {
-  display: none;
+tr td:nth-child(4),
+tr:nth-child(4) {
+    width: 0rem;
+    border-bottom: 1px dashed navy;
 }
+table {
+    
+    font-size: 1.5rem;
+    word-break: break-all;
+    border-collapse: collapse;
+    border: 1px solid navy;
+    width: 100%;
+    margin-bottom: 1rem;
 }
+label {
+  width: 9rem;
+}
+input {
+  border: 1px solid navy;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+textarea {
+  border: 1px solid navy;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+#name {
+  width: 70%;
+}
+#comment {
+  width: 70%;
+  height: 15rem;
+}
+#inputdata {
+  font-size: 1.5rem;
+}
+input 
+
 
 html.wait *,
 html.wait,
@@ -280,7 +344,7 @@ body.wait {
 }
 
 #snackbar {
-  visibility: hidden;
+  display: none;
   min-width: 250px;
   margin-left: -125px;
   background-color: #333;
@@ -296,7 +360,7 @@ body.wait {
 }
 
 #snackbar.show {
-  visibility: visible;
+  display: block;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
