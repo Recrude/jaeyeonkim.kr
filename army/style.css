@@ -109,8 +109,7 @@ body{
 }
 
 h1 {
-
-    font-size: 2rem;
+    font-size: 4rem;
     line-height: 1.2;
 }
 .selected {
@@ -139,6 +138,15 @@ h2 {
 }
 summary h2 {
   font-size: 4rem;
+}
+.hidedspan {
+  opacity: 0;
+  background-color: navy;
+  color: white;
+  transition: 1s;
+}
+.parenth2:hover .hidedspan {
+  opacity: 1;
 }
 p {
   font-size: 1.5rem;
