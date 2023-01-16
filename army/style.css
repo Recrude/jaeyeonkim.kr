@@ -9,21 +9,21 @@
     font-family: 'sm3-g-gothic';
     font-weight: 800; 
     font-style: normal; 
-    src: url('./fonts/SM3견출고딕-Regular.woff') format('woff');
+    src: url('./fonts/sm3-g-gothic.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'sm3-sj-gothic2';
     font-weight: 300; 
     font-style: normal; 
-    src: url('./fonts/SM3신중고딕-02.woff') format('woff');
+    src: url('./fonts/sm3-sj-gothic2.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'sm3-t-gothic';
     font-weight: 700; 
     font-style: normal; 
-    src: url('./fonts/SM3태고딕-Regular.woff') format('woff');
+    src: url('./fonts/sm3-t-gothic') format('woff');
     font-display: swap;
 }
 /*.ml-en, .ml-punct, .ml-num {
