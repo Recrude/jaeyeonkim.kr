@@ -23,7 +23,7 @@
     font-family: 'sm3-t-gothic';
     font-weight: 700; 
     font-style: normal; 
-    src: url('./fonts/sm3-t-gothic') format('woff');
+    src: url('./fonts/sm3-t-gothic.woff') format('woff');
     font-display: swap;
 }
 /*.ml-en, .ml-punct, .ml-num {
