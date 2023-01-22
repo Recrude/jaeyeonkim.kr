@@ -436,6 +436,5 @@ body.wait {
 
 ::selection {
   color: white;
-  background-color: navy;
-  font-style: normal;
+  background-color: rgba(0, 0, 128, 0.99);
 }
