@@ -350,6 +350,7 @@ textarea {
 td {
   height: 100%;
   vertical-align: top;
+  padding-left: 0.25rem;
 }
 
 tr:first-of-type {
@@ -431,4 +432,10 @@ body.wait {
     bottom: 0;
     opacity: 0;
   }
+}
+
+::selection {
+  color: white;
+  background-color: navy;
+  font-style: normal;
 }
