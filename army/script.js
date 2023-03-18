@@ -101,7 +101,7 @@ counter1();
 setInterval(counter1, 1000);
 
 var counter2 = function(){
-    var startDate = new Date("2023/03/13 00:00:00") //디데이 (날짜 설정)
+    var startDate = new Date("2023/03/10 10:00:00") //디데이 (날짜 설정)
         setInterval(function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
