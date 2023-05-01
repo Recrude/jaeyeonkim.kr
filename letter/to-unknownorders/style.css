@@ -1,0 +1,249 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+
+html {
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body{
+/*  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;*/
+    font-family: agchoijeongho-screen, serif;
+/*    word-spacing: -.2rem;*/
+    line-height: 1.6;
+    text-align: left;
+    font-style: normal;
+    word-break: keep-all;
+    background-color: navy;
+}
+
+article {
+  display: fixed;
+  overflow-y: scroll;
+  height: 92vh;
+  margin: 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: .4rem;
+}
+h1 {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: navy;
+    text-underline-offset: .5rem;
+    margin-bottom: 1rem;
+}
+h2 {
+    font-size: 1.25rem;
+    line-height: 1.7;
+}
+p {
+  margin-bottom: 1rem;
+}
+ol {
+    padding-left: 1.6rem;
+
+}
+.navyword {
+  color: navy;
+  font-size: 0.8rem;
+  padding-left: 2rem;
+  text-decoration-style: italic;
+}
+.explain {
+  color: navy;
+  font-size: 0.8rem;
+}
+
+a {
+  color: inherit;
+/*  text-emphasis-style: dot;
+  text-emphasis-position: over left;*/
+  text-decoration: none;
+/*  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: .1rem;
+  text-underline-position: under;*/
+}
+a:hover {
+  color: blue;
+  transition: .3s;
+}
+
+summary {
+    display: flex;
+    flex-direction: row;
+}
+summary:hover {
+    color: blue;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.ans{
+    display: flex;
+    flex-direction: row;
+}
+details {
+
+    font-size: 2.5rem;
+}
+summary {
+    font-size: 2.5rem;
+}
+details a {
+    font-size: inherit;
+}
+details summary::-webkit-details-marker {
+  display:none;
+}
+
+img {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1em;
+  font-size: 4rem;
+  text-align: center;
+  -webkit-animation: fade 1s;
+  animation: fade 1s;
+}
+
+iframe{
+  width: 75%;
+  height: calc(100vh - 4rem);
+  border: .1rem dotted;
+  margin: 1rem;
+  padding: 1rem;
+  word-break: keep-all;
+  background-color: black;
+}
+
+iframe::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+iframe {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+nav {
+  height: calc(100vh - 2rem);
+  width: 25%;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.mobilenav {
+  display: none;
+}
+
+@media only screen and (min-width: 600px) {
+  html {
+    font-size: 24px;
+  }
+  #slide1 {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  nav {
+    width: 100%;
+    height: 40%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+  }
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    display: inline;
+  }
+  a {
+    display: inline;
+  }
+
+  iframe {
+    width: 100%;
+    height: 89vh;
+    margin: 0;
+    word-spacing: -.1rem;
+  }
+  .mobilenav {
+    display: block;
+    width: 85%;
+  }
+  .column1 {
+    display: none;
+  }
+}
+
