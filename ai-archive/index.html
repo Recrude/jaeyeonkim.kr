@@ -179,7 +179,24 @@ ul  {
  details summary::-webkit-details-marker {  
    display:none;  
  } 
-  
+details summary::-webkit-details-marker {
+  display:none;
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary {
+  list-style: none;
+}
+
+details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
+details > summary::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
  .column2575 { 
    display: flex; 
    flex-direction: row; 
