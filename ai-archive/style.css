@@ -1,0 +1,185 @@
+
+@font-face { 
+ font-family: "suisse"; 
+ src: url("../assets/webfont/SuisseIntl-Regular-WebM.woff") format("woff"); 
+ font-weight: 400; 
+ font-style: normal; 
+} 
+@font-face { 
+ font-family: "suisse"; 
+ src: url("../assets/webfont/SuisseIntl-Book-WebM.woff") format("woff"); 
+ font-weight: 500; 
+ font-style: normal; 
+} 
+@font-face { 
+ font-family: "suisse"; 
+ src: url("../assets/webfont/SuisseIntl-Medium-WebM.woff") format("woff"); 
+ font-weight: 600; 
+ font-style: normal; 
+} 
+@font-face {  
+  font-family: "suisse";  
+  src: url("../assets/webfont/SuisseIntl-SemiBold-WebM.woff") format("woff");  
+  font-weight: 700;  
+  font-style: bold;  
+} 
+*, 
+*::before, 
+*::after { 
+ margin: 0; 
+ padding: 0; 
+ box-sizing: border-box; 
+ font-size: 100%; 
+ font-weight: normal; 
+ font-style: normal; 
+} 
+
+body::-webkit-scrollbar { 
+ display: none; 
+} 
+
+body{ 
+ -ms-overflow-style: none; 
+ scrollbar-width: none; 
+} 
+
+html { 
+ font-size: 12px; 
+} 
+
+body { 
+ font-family: suisse, "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; 
+ /*font-family: suisse, sans-serif;*/ 
+ font-size: 1 rem; 
+ font-weight: 500; 
+ line-height: 1.6; 
+ color: black; 
+ background-color: snow; 
+ cursor: default; 
+ padding: 1rem; 
+ word-break: keep-all; 
+} 
+
+.full-img { 
+ width: 100%; 
+ height: 100%; 
+} 
+
+@media only screen and (min-width: 600px) { 
+ html { 
+   font-size: 16px; 
+ } 
+ 
+} 
+@media (prefers-color-scheme : dark){  
+ body {  
+   background-color: #121212; color: snow;  
+ }  
+ .footer {  
+   background-color: #0a0a0a; background: linear-gradient(transparent, #121212, #121212, #121212);  
+ }  
+ .message {  
+   background-color: #121212; color: snow;  
+ }  
+ article { 
+   border-top: 0.1rem solid snow; 
+ } 
+ header { 
+   border-top: 0.25rem solid snow; 
+ } 
+} 
+
+
+header { 
+ width: 100%; 
+ display: flex; 
+ flex-direction: row; 
+ justify-content: space-between; 
+ border-top: 0.25rem solid black; 
+ /* 
+ position: fixed; 
+ top: 1rem; 
+ left: 1rem; 
+ background-color: snow; 
+ */ 
+} 
+
+h1 { 
+ font-weight: 700; 
+ line-height: 1.0; 
+ display: inline-block; 
+ font-size: 14vw; 
+ margin: 0; 
+} 
+article { 
+ padding-top: 1rem; 
+ border-top: 0.1rem solid black; 
+} 
+p { 
+ padding-bottom: .5rem; 
+} 
+.lastp{ 
+ margin-bottom: .5rem; 
+} 
+h2 { 
+ font-weight: 700; 
+ width: 100%; 
+ padding-left: 25%; 
+} 
+h3 { 
+ font-weight: 700; 
+} 
+.underline { 
+ border-bottom: 0.1rem solid black; 
+} 
+h4 { 
+ font-weight: 700; 
+} 
+
+ul, ol { 
+ list-style: none; 
+ margin-bottom: 1rem;
+} 
+ul  {
+ margin-bottom: 2rem;
+}
+summary { 
+ text-decoration: underline; 
+} 
+
+details summary::-webkit-details-marker {  
+ display:none;  
+} 
+details summary::-webkit-details-marker {
+  display:none;
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary {
+  list-style: none;
+}
+
+details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
+details > summary::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
+.column2575 { 
+ display: flex; 
+ flex-direction: row; 
+} 
+.div25 { 
+ width: 25%; 
+} 
+.div75 { 
+ width: 75% 
+} 
+.eng { 
+ line-height: 1.3; 
+ word-break: normal; 
+} 
+
