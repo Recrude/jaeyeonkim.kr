@@ -62,14 +62,13 @@ body {
 
 .full-img { 
  width: 100%; 
- height: 100%; 
 } 
 
 @media only screen and (min-width: 600px) { 
  html { 
    font-size: 16px; 
  } 
- 
+
 } 
 @media (prefers-color-scheme : dark){  
  body {  
@@ -124,16 +123,17 @@ p {
 h2 { 
  font-weight: 700; 
  width: 100%; 
- padding-left: 25%; 
+ padding-left: 20%; 
 } 
 h3 { 
  font-weight: 700; 
 } 
 .underline { 
  border-bottom: 0.1rem solid black; 
+ margin-bottom: 0.5rem;
 } 
 h4 { 
- font-weight: 700; 
+ font-weight: normal; 
 } 
 
 ul, ol { 
@@ -143,8 +143,12 @@ ul, ol {
 ul  {
  margin-bottom: 2rem;
 }
+details {
+  margin-bottom: 0.5rem;
+}
 summary { 
  text-decoration: underline; 
+ cursor: pointer;
 } 
 
 details summary::-webkit-details-marker {  
@@ -173,10 +177,10 @@ details > summary::-webkit-details-marker /* Safari */ {
  flex-direction: row; 
 } 
 .div25 { 
- width: 25%; 
+ width: 20%; 
 } 
 .div75 { 
- width: 75% 
+ width: 80% 
 } 
 .eng { 
  line-height: 1.3; 
