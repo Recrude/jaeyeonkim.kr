@@ -135,6 +135,11 @@ h3 {
 h4 { 
  font-weight: 700; 
 } 
+a {
+  font-weight: 700; 
+  color: inherit;
+  text-underline-position : under;
+}
 
 ul, ol { 
  list-style: none; 
@@ -147,7 +152,6 @@ details {
   margin-bottom: 0.5rem;
 }
 summary { 
- text-decoration: underline; 
  cursor: pointer;
 } 
 
