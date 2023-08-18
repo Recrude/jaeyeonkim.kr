@@ -101,14 +101,14 @@ counter1();
 setInterval(counter1, 1000);
 
 var counter2 = function(){
-    var startDate = new Date("2023/03/10 10:00:00") //디데이 (날짜 설정)
+    var startDate = new Date("2023/03/13 00:00:00") //디데이 (날짜 설정)
         setInterval(function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
-            var d = String(Math.floor(distance / (1000 * 60 * 60 * 24)));
-            var h = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0");
-            var m = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0");
-            var s = String(Math.floor((distance % (1000 * 60)) / 1000));
+            var d = Math.abs(String(Math.floor(distance / (1000 * 60 * 60 * 24))));
+            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0"));
+            var m = Math.abs(String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0"));
+            var s = Math.abs(String(Math.floor((distance % (1000 * 60)) / 1000)));
         
             if(s < 10){ s = '0'+s;}
             $('#remain-time2').html(d + ' ' + h +':'+ m +':'+ s+'' )
@@ -126,10 +126,10 @@ var counter3 = function(){
         setInterval(function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
-            var d = String(Math.floor(distance / (1000 * 60 * 60 * 24)));
-            var h = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0");
-            var m = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0");
-            var s = String(Math.floor((distance % (1000 * 60)) / 1000));
+            var d = Math.abs(String(Math.floor(distance / (1000 * 60 * 60 * 24))));
+            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0"));
+            var m = Math.abs(String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0"));
+            var s = Math.abs(String(Math.floor((distance % (1000 * 60)) / 1000)));
         
             if(s < 10){ s = '0'+s;}
             $('#remain-time3').html(d + ' ' + h +':'+ m +':'+ s+'' )
