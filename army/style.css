@@ -191,10 +191,12 @@ a {
   text-underline-position: under;
   cursor: pointer;
 }
-a:hover {
-  color: navy;
+a:active {
+  background-color: navy;
+  color: white;
   transition: .3s;
 }
+
 
 em {
   background-color: navy;
@@ -268,7 +270,7 @@ details summary::-webkit-details-marker {
     padding: 3vw;
   }
   .counter {
-      font-size: 12vw;
+      font-size: 19vw;
       text-align: center;
       letter-spacing: -0.8vw;
   }
@@ -331,6 +333,7 @@ label {
   height: 100%;
   vertical-align: top;
   height: 100%;
+  padding-left: 0.25rem;
 }
 input {
   border: 1px solid navy;
@@ -398,4 +401,25 @@ body.wait {
 ::selection {
   color: white;
   background-color: rgba(0, 0, 128, 0.99);
+}
+
+#timeout {
+  filter: blur(5px);
+}
+.hovering-text {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  top: -50vh;
+}
+.hovering-text h2 {
+    display: inline-block;
+    text-align: center;
+    font-size: 2rem;
+    transform: rotate(-30deg);
+    font-weight: 900;
+    background-color: navy;
+    color: white;
 }

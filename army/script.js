@@ -85,10 +85,12 @@ var counter1 = function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
             var d = String(Math.floor(distance / (1000 * 60 * 60 * 24)));
-            var h = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0");
-            var m = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0");
+            var h = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            var m = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
             var s = String(Math.floor((distance % (1000 * 60)) / 1000));
-        
+            if(d < 10){ d = '0'+d;}
+            if(h < 10){ h = '0'+h;}
+            if(m < 10){ m = '0'+m;}
             if(s < 10){ s = '0'+s;}
             $('#remain-time').html(d + ' ' + h +':'+ m +':'+ s+'' )
             
@@ -106,10 +108,12 @@ var counter2 = function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
             var d = Math.abs(String(Math.floor(distance / (1000 * 60 * 60 * 24))));
-            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0"));
-            var m = Math.abs(String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0"));
+            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))));
+            var m = Math.abs(String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))));
             var s = Math.abs(String(Math.floor((distance % (1000 * 60)) / 1000)));
-        
+            if(d < 10){ d = '0'+d;}
+            if(h < 10){ h = '0'+h;}
+            if(m < 10){ m = '0'+m;}
             if(s < 10){ s = '0'+s;}
             $('#remain-time2').html(d + ' ' + h +':'+ m +':'+ s+'' )
             
@@ -127,10 +131,12 @@ var counter3 = function(){
             var currentDate = new Date(); //현재 날짜 가져오기
             var distance = startDate.getTime() - currentDate.getTime();
             var d = Math.abs(String(Math.floor(distance / (1000 * 60 * 60 * 24))));
-            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0"));
+            var h = Math.abs(String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))));
             var m = Math.abs(String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0"));
             var s = Math.abs(String(Math.floor((distance % (1000 * 60)) / 1000)));
-        
+            if(d < 10){ d = '0'+d;}
+            if(h < 10){ h = '0'+h;}
+            if(m < 10){ m = '0'+m;}
             if(s < 10){ s = '0'+s;}
             $('#remain-time3').html(d + ' ' + h +':'+ m +':'+ s+'' )
             
