@@ -1,0 +1,66 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <article>
+    <h1>ASDF Piano</h1>
+    <h2>About ASDF Piano</h2>
+    <p>ASDF Piano is a web-based tool that allows users to play simple piano notes directly from their keyboard. The website's design is minimalist, focusing on ease of use and accessibility. Users can press the keys A, S, D, F, G, H, and J to play corresponding piano notes, making it a straightforward and engaging way to create music.</p>
+    <h2>How It Works</h2>
+    <p>The interface is simple and intuitive. The keys on your keyboard correspond to piano notes, and when you press them, you'll hear the sound of each note. The white keys are represented by the letters A, S, D, F, G, H, and J, while the black keys, or sharps, are associated with the letters W, E, T, Y, and U. This layout makes it easy for anyone to start playing, even without prior musical experience.</p>
+    <h2>Design and Layout</h2>
+    <p>ASDF Piano features a clean and functional design. The notes are displayed on the screen with large, bold letters, ensuring they are easy to see and understand. The use of monospace and serif fonts provides a clear and distinct appearance for both white and sharp keys. The piano keys are positioned at the bottom of the screen, making them accessible and easy to reach while you play.</p>
+    <h2>Technology Used</h2>
+    <p>The site is built using standard web technologies, including HTML, CSS, and JavaScript. It also utilizes the Tone.js library to produce accurate and responsive piano sounds. This ensures that the experience is smooth and that the notes you play correspond directly to the keys pressed on your keyboard.</p>
+    </article>
+<!--     <div id="piano">
+      <span class="key" id="C"><strong>A</strong></span>
+      <span class="sharp" id="CS"><strong>w</strong></span>
+      <span class="key" id="D"><strong>S</strong></span>
+      <span class="sharp" id="DS"><strong>e</strong></span>
+      <span class="key" id="E"><strong>D</strong></span>
+      <span class="key" id="F"><strong>F</strong></span>
+      <span class="sharp" id="FS"><strong>t</strong></span>
+      <span class="key" id="G"><strong>G</strong></span>
+      <span class="sharp" id="GS"><strong>y</strong></span>
+      <span class="key" id="A"><strong>H</strong></span>
+      <span class="sharp" id="AS"><strong>u</strong></span>
+      <span class="key" id="B"><strong>J</strong></span>
+    </div> -->
+    <div class="piano">
+      <span class="key" id="C">A</span>
+      <span class="key" id="D">S</span>
+      <span class="key" id="E">D</span>
+      <span class="key" id="F">F</span>
+      <span class="key" id="G">G</span>
+      <span class="key" id="A">H</span>
+      <span class="key" id="B">J</span>
+    </div>
+    <div class="piano sharpy">
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="CS">w&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="DS">&nbsp;e&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="FS">t&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="GS">y&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>
+      <span class="sharp" id="AS">u&nbsp;</span>
+      <span class="sharp" id="">&nbsp;</span>   
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.multilingual.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

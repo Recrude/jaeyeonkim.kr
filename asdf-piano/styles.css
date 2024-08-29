@@ -1,0 +1,103 @@
+/** @format */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+    box-sizing: border-box;
+  font-size: 100%;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.chivo-mono-<uniquifier> {
+  font-family: "Chivo Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: bold;
+}
+body {
+  width: 90vw;
+  margin: 0 auto;
+  background-color: white;
+}
+h1 {
+  display: block;
+  text-align: center;
+  font-family: serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 4vw;
+  padding-top: 4vw;
+}
+h2 {
+  display: block;
+  font-size: 1.5vw;
+    text-align: center;
+  font-family: serif;
+  font-weight: 700;
+  padding-top: 2vw;
+}
+p {
+  display: inline-block;
+  font-size: 1.5vw;
+  font-family: serif;
+  font-weight: 300;
+}
+
+.piano {
+  display: flex;
+  width: 90vw;
+  margin: 0 auto;
+  position: fixed;
+  bottom: -1vw;
+  left: 5vw;
+  justify-content: space-between;
+}
+.sharpy{
+  position: fixed;
+  bottom: 6vw;
+  left: 5vw;
+}
+.class-a {
+  color: red;
+}
+.key {
+  font-family: "Chivo Mono", monospace;
+  font-weight: 700;
+  font-size: 13vw;
+/*  height: 100vh;
+  border-right: 1px solid black;*/
+  color: white;
+  -webkit-text-stroke: 1px black;
+}
+.sharp {
+  font-family: serif, monospace;
+  font-size: 8vw;
+  font-weight: 300;
+  width: 3.5%;
+  color: black;
+  font-style: italic;
+  vertical-align: top;
+}
+/*.key {
+  height: 400px;
+  width: 10.2857142857%;
+  float: left;
+  border: 5px solid black;
+  border-right: none;
+  background: white;
+  text-align: center;
+  padding-top: 300px;
+}*/
+
+/*.sharp {
+  height: 275px;
+  width: 3.5%;
+  float: left;
+  border-right: none;
+  background: black;
+  text-align: center;
+  padding-top: 206.25px;
+  color: black;
+}*/
