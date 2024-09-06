@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Memo Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Memo Pad</h1>
+        <!-- Text area for writing memos -->
+        <textarea id="memoText" placeholder="Write your memo here..."></textarea>
+
+        <!-- Image upload input -->
+        <input type="file" id="imageUpload" accept="image/*" />
+        <button onclick="uploadImage()">Upload Image</button>
+
+        <!-- Display uploaded images -->
+        <div id="imageContainer"></div>
+
+        <!-- Save button -->
+        <button onclick="saveMemo()">Save Memo</button>
+
+        <!-- List of saved memos -->
+        <h2>Saved Memos</h2>
+        <div id="memoList"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
