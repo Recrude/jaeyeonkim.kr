@@ -104,7 +104,7 @@ body{
     text-align: left;
     font-style: normal;
     word-break: keep-all;
-    background-color: white;
+    /* background-color: white; */
     padding: 2vw;
 }
 
@@ -423,3 +423,12 @@ body.wait {
     background-color: navy;
     color: white;
 }
+
+.background { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  z-index: -1; /* Send it to the back */ 
+} 
