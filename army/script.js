@@ -217,11 +217,9 @@
 // };
 
 // window.confettiful = new Confettiful(document.querySelector('.js-container'));
-$(document).ready(function () {
-  $(window).load(function(){
-  $('#preloader').delay(1000).fadeOut();
- });
-});
+setTimeout(function () {
+  $('#preloader').fadeToggle ("slow");
+},1000);
 
 const deadline1 = new Date("2024/9/29 00:00:00").getTime();
 const deadline2 = new Date("2023/03/10 00:00:00").getTime();
