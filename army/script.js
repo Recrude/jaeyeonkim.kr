@@ -219,9 +219,9 @@
 // window.confettiful = new Confettiful(document.querySelector('.js-container'));
 
 
-const deadline1 = new Date("2024/10/03 01:00:00").getTime();
-const deadline2 = new Date("2023/03/14 01:00:00").getTime();
-const deadline3 = new Date("2023/02/03 01:00:00").getTime();
+const deadline1 = new Date("2024/9/29 00:00:00").getTime();
+const deadline2 = new Date("2023/03/10 00:00:00").getTime();
+const deadline3 = new Date("2023/01/30 00:00:00").getTime();
 
 let intervalId = setInterval(() => {
     const now = new Date().getTime();
