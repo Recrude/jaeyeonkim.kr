@@ -130,11 +130,11 @@ h1 {
   color: white;
 }
 
-#remain-time2 {
+#timer2 {
 color: navy;
 }
 
-#remain-time3 {
+#timer3 {
 color: navy;
 }
 
@@ -423,12 +423,16 @@ body.wait {
     background-color: navy;
     color: white;
 }
-
-.background { 
+iframe {
   position: absolute; 
   top: 0; 
   left: 0; 
   width: 100%; 
   height: 100%; 
   z-index: -1; /* Send it to the back */ 
-} 
+  border: none;
+}
+
+.end-navy {
+  color: navy;
+}
