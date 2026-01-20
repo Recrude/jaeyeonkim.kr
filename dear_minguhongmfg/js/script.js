@@ -2,7 +2,7 @@ var sound_1 = new Howl({
   src: ['mp3/808kick2.mp3']
 }), sound_2 = new Howl({
   src: ['mp3/808snare.mp3'],
-  volume: 0.5
+  volume: 0.25
 });
 
 function color() {
