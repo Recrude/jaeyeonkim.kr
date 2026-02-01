@@ -1,0 +1,216 @@
+:root {
+  --text: #D7DAD6;
+  --bg: #000;
+  --newsletter-height: 3.5rem;
+}
+
+/* font loading styles */
+h1, h2, h3, p {
+  transition: color 0.5s ease-in-out;
+}
+.wf-loading h1, 
+.wf-loading h2, 
+.wf-loading h3, 
+.wf-loading h3, 
+.wf-loading p, 
+.wf-loading p a {
+  background-image: 
+    radial-gradient(rgb(0, 0, 0) 18%, transparent 18%),
+    radial-gradient(rgb(0, 0, 0) 18%, transparent 18%);
+  background-position: 2px 2px, 6px 6px;
+  background-size: 8px 8px;
+  background-color: var(--bg);
+  border-bottom: none;
+  color: transparent;  
+}
+
+/* defaults */
+body {
+  background-color: var(--bg);
+  font-family: Times, serif;
+  color: var(--text);
+  line-height: 1.3;
+  font-size: 2rem;
+  position: relative;
+  letter-spacing: 0.005em;
+  word-break: keep-all;
+}
+h1 { 
+  font-family: neue-haas-grotesk-display, sans-serif; 
+  font-size: 5rem;
+  line-height: 0.9;
+}
+h1 .ml-ko { 
+  font-family: pretendard, sans-serif; 
+  line-height: 0.95;
+}
+h2 { 
+  font-family: neue-haas-grotesk-text, sans-serif; 
+}
+h2 .ml-ko { 
+  font-family: pretendard, sans-serif; 
+  line-height: 1.6;
+}
+h3 .ml-ko,
+p .ml-ko,
+li .ml-ko { 
+  font-family: sandoll-myeongjoneo1, serif; 
+  font-size: 92%; 
+  line-height: 1.6;
+  letter-spacing: -0.006em;
+  word-break: keep-all;
+}
+h3 .ml-en,
+p .ml-en,
+li .ml-en { 
+  position: relative;
+  top: 0.1rem;
+}
+
+h1, h1 > span, 
+h2, h3, p { margin-bottom: 1rem; }
+a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 100%;
+}
+a:hover {
+  background-color: var(--text);
+  color: var(--bg);
+  transition: .2s ease-in-out;
+}
+p a, li a {
+  border-bottom: 1px dotted var(--text);
+}
+p a:hover, li a:hover {
+  border-bottom: 1px dashed var(--text);
+}
+h3, .underline {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-thickness: 0.125rem;
+}
+::selection { background: var(--text); color: var(--bg); }
+::-moz-selection { background: var(--text); color: var(--bg); }
+input::selection { background: salmon; color: var(--text); }
+input::-moz-selection { background: var(--text); color: var(--bg); }
+
+footer p {
+  margin-bottom: 0;
+}
+
+#floret:before {
+  width: 1rem;
+  display: inline-block;
+  content: "";
+  animation: floret-content 1s infinite;
+}
+@keyframes floret-content {
+  0%, 24.99% { content: "✦"; }
+  25%, 49.99% { content: "✶"; }
+  50%, 74.99% { content: "✷"; }
+  75%, 100% { content: "⚹"; }
+}
+
+/* newsletter: Mailerlite overrides ---------------- */
+
+/* container to set height before js */
+div.newsletter {
+  /* background-color: var(--text); */
+  border: 1px solid var(--text);
+  height: var(--newsletter-height);
+  position: relative;
+  color: white;
+}
+div.newsletter .ml-embedded {
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+/* fade in when ready */
+div.newsletter.ready .ml-embedded {
+  opacity: 1;
+}
+div.newsletter .loading {
+  margin-top: -1px;
+  width: 50%;
+  height: calc(var(--newsletter-height) / 1);
+  border-right: 1px solid var(--text);
+  animation: loading 7s infinite;
+}
+@keyframes loading {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+/* reset Mailerlite styles */
+.ml-form-embedContainer * {
+  /* display: none !important; */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+/* input field */
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody, 
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow 
+input {
+  background-color: var(--text) !important;
+  padding: 0 0.5rem !important;
+  font-size: 2.5rem !important;
+  background-color: white;
+  color: var(--bg) !important;
+  font-family: neue-haas-grotesk-text, sans-serif; 
+  font-weight: 500;
+  height: var(--newsletter-height) !important;
+  line-height: var(--newsletter-height) !important;
+  outline: 0px;
+  transition: outline 0.2s ease-in-out !important;
+}
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow 
+input::placeholder {
+  color: white;
+  opacity: 1 !important;
+  transition: opacity 0.2s ease-in-out !important;
+}
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow 
+input:focus::placeholder {
+  opacity: 0 !important;
+}
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow 
+input:focus-visible {
+  outline: 8px dashed var(--text) !important;
+  padding-right: 4rem !important;
+}
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-webkit-autofill,
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-webkit-autofill:hover,
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-webkit-autofill:focus,
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-webkit-autofill:active  {
+    -webkit-text-fill-color: var(--bg) !important;
+    -webkit-box-shadow: 0 0 0px 40rem var(--text) inset;
+
+}
+
+/* show button on focus */
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent:has(input:focus-visible) + input + .ml-form-embedSubmit button{
+  opacity: 1 !important;
+}
+/* show button when input is not empty */
+/* .ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent:has(input:not(:placeholder-shown)) + input + .ml-form-embedSubmit button{
+  opacity: 1 !important;
+} */
+/* hide original success message */
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4,
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+  display: none;
+}
+/* custom success message */
+.ml-embedded #mlb2-28678024.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent::after {
+  content: "Subscribed ✶";
+  font-family: neue-haas-grotesk-display, sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 2.5rem !important;
+  line-height: 3.5rem !important;
+  color: var(--bg) !important;
+}

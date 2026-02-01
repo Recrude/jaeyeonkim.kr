@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학부인턴쉽 - KAIST 시각도구연구실</title>
+  <link rel="stylesheet" href="./KAIST 시각도구연구실 Visual Instruments Lab_files/styles.css">
+  <style>
+    @layer theme {
+      :root, :host {
+        --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        --spacing: 0.25rem;
+      }
+    }
+    @layer base {
+      *, ::after, ::before, ::backdrop, ::file-selector-button {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0 solid;
+      }
+      html, :host {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+        font-family: var(--font-sans);
+        -webkit-tap-highlight-color: transparent;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+    }
+    @layer utilities {
+      .pointer-events-none { pointer-events: none; }
+      .absolute { position: absolute; }
+      .top-0 { top: 0; }
+      .left-0 { left: 0; }
+      .w-full { width: 100%; }
+      .h-full { height: 100%; }
+      .p-4 { padding: calc(var(--spacing) * 4); }
+      .pb-8 { padding-bottom: calc(var(--spacing) * 8); }
+      .grid { display: grid; }
+      .gap-x-8 { column-gap: calc(var(--spacing) * 8); }
+      .cl-gray { color: rgb(100, 100, 100); }
+      .items-start { align-items: flex-start; }
+      .sm\:grid-cols-2 {
+        @media (width >= 40rem) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    }
+    .tk-neue-haas-grotesk-display{font-family:"neue-haas-grotesk-display",sans-serif;}
+    .tk-neue-haas-grotesk-text{font-family:"neue-haas-grotesk-text",sans-serif;}
+    .tk-sandoll-myeongjoneo1{font-family:"sandoll-myeongjoneo1",sans-serif;}
+    .tk-pretendard{font-family:"pretendard",sans-serif;}
+    .tk-batang{font-family:"batang",sans-serif;}
+
+
+    /* 비밀번호 오버레이 */
+    :root {
+      --pw-height: 3.5rem;
+    }
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .password-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .password-form {
+      width: 100%;
+      max-width: 600px;
+      padding: 1rem;
+      position: relative;
+    }
+    .password-input-wrapper {
+      position: relative;
+    }
+    .password-input {
+      width: 100%;
+      background-color: #ffffff;
+      color: #000000;
+      caret-color: #000000;
+      border: none;
+      padding: 0 0.5rem;
+      font-family: neue-haas-grotesk-text, sans-serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      height: var(--pw-height);
+      line-height: var(--pw-height);
+      outline: none;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: outline 0.2s ease-in-out, padding 0.2s ease-in-out;
+    }
+    .password-input::placeholder {
+      color: #000000;
+      letter-spacing: normal;
+      text-transform: none;
+    }
+    .password-input:focus {
+      outline: 8px dashed #000000;
+      padding-right: 4rem;
+    }
+    .password-input:focus::placeholder {
+      opacity: 0;
+    }
+    .password-submit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: var(--pw-height);
+      height: var(--pw-height);
+      background-color: #ffffff;
+      border: none;
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .password-submit::after {
+      content: "↵";
+      font-size: 1.5rem;
+      color: #000000;
+    }
+    .password-input:focus + .password-submit {
+      opacity: 1;
+    }
+    .password-error .password-input-wrapper {
+      animation: shake 0.3s ease;
+    }
+    .password-error .password-input {
+      outline: 8px dashed #cc0000;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* 콘텐츠 숨김 */
+    .content-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+  <script src="./KAIST 시각도구연구실 Visual Instruments Lab_files/oqy0col.js" async=""></script>
+  <script src="./KAIST 시각도구연구실 Visual Instruments Lab_files/multilingual.js"></script>
+</head>
+<body class="p-4">
+  <!-- 비밀번호 입력 오버레이 -->
+  <div id="password-overlay" class="password-overlay">
+    <div id="password-form" class="password-form">
+      <div class="password-input-wrapper">
+        <input 
+          type="password" 
+          id="password-input" 
+          class="password-input" 
+          placeholder="✢❋✦..."
+          autocomplete="off"
+          autofocus
+        >
+        <button type="button" class="password-submit" id="password-submit"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-content" class="content-hidden">
+  <main class="grid sm:grid-cols-2 items-start gap-x-8">
+    <div class="pb-8">
+      <h3><span lang="ko" data-script="korean" class="ml-ko">학부인턴쉽</span></h3>
+      <p><del><span lang="en" data-script="latin" class="ml-en">KAIST </span><span lang="ko" data-script="korean" class="ml-ko">학부 재학생 중</del> 인턴십, 독립연구, 또는 </span><span lang="en" data-script="latin" class="ml-en">URP(</span><span lang="ko" data-script="korean" class="ml-ko">학부연구프로그램</span><span lang="en" data-script="latin" class="ml-en">)</span><span lang="ko" data-script="korean" class="ml-ko">를 통해 연구실 활동에 참여하고자 하는 </span><a href="https://jaeyeonkim.kr">김재연</a> 학생은 <a href="../cv/index.html">이력서</a>, <a href="../cover-letter/index.html">커버레터</a>, <a href="../portfolio/index.html">포트폴리오</a>를 준비해서 이메일로 문의하세요. 타 대학 재학생의 경우에도 같은 절차를 통해 지원할 수 있습니다.</span></p>
+    </div>
+    <div class="pb-8">
+      <h3><span lang="en" data-script="latin" class="ml-en">Undergraduate internship</span></h3>
+      <p><del><span lang="en" data-script="latin" class="ml-en">KAIST undergraduate</del> students interested in internships, independent studies, or URP (Undergraduate Research Program) opportunities are welcome to contact us. Please email your <a href="../cv/index.html">CV</a>, <a href="../cover-letter/index.html">cover letter</a>, and <a href="../portfolio/index.html">portfolio</a> to express your interest. Students from other universities, such as <a href="https://jaeyeonkim.kr">Jaeyeon Kim</a>, can also apply through the same process.</span></p>
+    </div>
+  </main>
+
+  <div class="overlay absolute top-0 left-0 w-full h-full pointer-events-none">
+    <svg class="cell-svg" style="width: 100%; height: 100%; float: none;" viewBox="0 0 1000 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="500" cy="500" r="499.5" stroke="gray" stroke-width="0.75" fill="transparent" vector-effect="non-scaling-stroke"></circle>
+      <path class="pie-path" d="M 500 500 L 500 0.5 A 499.5 499.5 0 0 1 993.0689878770011 420.10492384414533 Z" fill="transparent" stroke="black" stroke-width="0.75" vector-effect="non-scaling-stroke"></path>
+    </svg>
+  </div>
+  <div class="grid sm:grid-cols-2 items-start gap-x-8 cl-gray">
+    <div>
+    <p>재연은 훌륭한 지원서 전략을 고민하다 이번에도 ‘낯설게 하기’ 전략을 택했습니다.
+      <br><br>낯설게 하려고 어떤 것이 가장 익숙할지 고민해 보니 지금 제 눈에 가장 많이 익은 것은 시각도구연구실 웹사이트의 지원을 안내하는 위 문단이더군요. 코드를 훔쳐내어 뜯어보는 것만큼, 타인의 방식에 대해 공부가 잘 되는 것도 없다고 생각합니다. 저를 발견해 가며 동시에 강이룬 선생님에 대해 더 알아가는 시간을 충분히 가졌습니다.
+      <br><br>이제는 고민을 줄이고 정말로 제출해 보려 합니다. 그나저나 오늘이 며칠이죠?</p>
+    </div>
+    <div class="pb-8">
+      <p><span lang="ko" data-script="korean" class="ml-ko">오늘은 </span><span id="date-year"></span><span lang="ko" data-script="korean" class="ml-ko">년 </span><span id="date-month"></span><span lang="ko" data-script="korean" class="ml-ko">월 </span><span id="date-day"></span><span lang="ko" data-script="korean" class="ml-ko">일, </span><span id="time-hour"></span><span lang="ko" data-script="korean" class="ml-ko">시 </span><span id="time-minute"></span><span lang="ko" data-script="korean" class="ml-ko">분입니다.</span><br><span lang="ko" data-script="korean" class="ml-ko">재연이 이메일을 보낸지 </span><span id="elapsed-days"></span><span lang="ko" data-script="korean" class="ml-ko">일 </span><span id="elapsed-hours"></span><span lang="ko" data-script="korean" class="ml-ko">시간 </span><span id="elapsed-minutes"></span><span lang="ko" data-script="korean" class="ml-ko">분 지났습니다.</span></p>
+    </div>
+  </div>
+  </div><!-- /main-content -->
+
+  <script src="./KAIST 시각도구연구실 Visual Instruments Lab_files/main.js"></script>
+  
+  <script>
+    // 비밀번호 기능
+    (function() {
+      const PASSWORD = 'APAP';
+      const overlay = document.getElementById('password-overlay');
+      const form = document.getElementById('password-form');
+      const input = document.getElementById('password-input');
+      const submitBtn = document.getElementById('password-submit');
+      const content = document.getElementById('main-content');
+      
+      function checkPassword() {
+        const value = input.value.toUpperCase();
+        
+        if (value === PASSWORD) {
+          // 비밀번호 맞음
+          overlay.classList.add('hidden');
+          content.classList.remove('content-hidden');
+          sessionStorage.setItem('vv-auth', 'true');
+          return true;
+        }
+        return false;
+      }
+      
+      function showError() {
+        form.classList.add('password-error');
+        input.value = '';
+        setTimeout(() => {
+          form.classList.remove('password-error');
+        }, 500);
+      }
+      
+      input.addEventListener('input', function() {
+        checkPassword();
+      });
+      
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          if (!checkPassword()) {
+            showError();
+          }
+        }
+      });
+      
+      submitBtn.addEventListener('click', function() {
+        if (!checkPassword()) {
+          showError();
+        }
+      });
+      
+      // 세션에 인증 정보가 있으면 바로 표시
+      if (sessionStorage.getItem('vv-auth') === 'true') {
+        overlay.classList.add('hidden');
+        content.classList.remove('content-hidden');
+      }
+    })();
+  </script>
+
+  <script>
+    // 날짜 및 경과 시간 표시
+    (function() {
+      // 이메일 발송 시간: 2026년 2월 2일 오전 9시 (KST)
+      const emailSentTime = new Date('2026-02-02T09:00:00+09:00');
+      const pad = (n) => String(n).padStart(2, '0');
+      
+      function updateDateTime() {
+        const now = new Date();
+        
+        // 현재 날짜/시간 표시
+        const setEl = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+        
+        setEl('date-year', now.getFullYear());
+        setEl('date-month', now.getMonth() + 1);
+        setEl('date-day', now.getDate());
+        setEl('time-hour', pad(now.getHours()));
+        setEl('time-minute', pad(now.getMinutes()));
+        
+        // 경과 시간 계산
+        const diff = now - emailSentTime;
+        
+        if (diff < 0) {
+          setEl('elapsed-days', '-');
+          setEl('elapsed-hours', '--');
+          setEl('elapsed-minutes', '--');
+        } else {
+          const totalMinutes = Math.floor(diff / (1000 * 60));
+          const totalHours = Math.floor(totalMinutes / 60);
+          const days = Math.floor(totalHours / 24);
+          const hours = totalHours % 24;
+          const minutes = totalMinutes % 60;
+          
+          setEl('elapsed-days', days);
+          setEl('elapsed-hours', pad(hours));
+          setEl('elapsed-minutes', pad(minutes));
+        }
+      }
+      
+      // 초기 실행 및 1분마다 업데이트
+      updateDateTime();
+      setInterval(updateDateTime, 60000);
+    })();
+  </script>
+</body>
+</html>
+
