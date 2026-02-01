@@ -433,3 +433,221 @@ a:hover {
     }
 }
 
+
+/* ===========================
+   Print Styles
+   =========================== */
+
+@media print {
+    /* ==================== */
+    /* 페이지 설정 */
+    /* ==================== */
+    @page {
+        size: A4;
+        margin: 10mm; /* 내지 여백 */
+    }
+    
+    @page :first {
+        margin: 0; /* 표지는 margin 0 - 표지 자체에서 여백 처리 */
+    }
+    
+    /* ==================== */
+    /* 전역 리셋 */
+    /* ==================== */
+    *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    html {
+        height: auto;
+        overflow: visible;
+    }
+    
+    body {
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+        background: white !important;
+        opacity: 1;
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* ==================== */
+    /* 레이아웃 리셋 */
+    /* ==================== */
+    .container {
+        height: auto;
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .card-container {
+        perspective: none;
+        width: 100%;
+        height: auto;
+        max-width: none;
+        max-height: none;
+        position: static;
+    }
+    
+    .card {
+        position: static;
+        transform-style: flat;
+        transform: none !important;
+        cursor: auto;
+        display: block;
+    }
+    
+    .card.flipped {
+        transform: none !important;
+    }
+    
+    .card-front,
+    .card-back {
+        position: static;
+        width: 100%;
+        height: auto;
+        backface-visibility: visible;
+        -webkit-backface-visibility: visible;
+        overflow: visible;
+        transform: none !important;
+        display: block;
+    }
+    
+    /* ==================== */
+    /* 표지 (첫 페이지) */
+    /* ==================== */
+    .card-front {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 210mm;  /* A4 너비 */
+        height: 297mm; /* A4 높이 */
+        background: #f2f2f2 !important;
+        page-break-after: always;
+        break-after: page;
+        position: relative;
+        margin: 0;
+        padding: 12mm; /* 테두리가 보일 여백 - 표지 내부 패딩 */
+        box-sizing: border-box;
+    }
+    
+    .cover-lettering {
+        width: 55%;
+        max-width: 380px;
+    }
+    
+    /* 표지 테두리 */
+    .cover-border-wrapper {
+        --s: 6px;
+        --c: 24px;
+        --d: 20px;
+        --g: 14px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* ==================== */
+    /* 내지 (본문 페이지들) */
+    /* ==================== */
+    .card-back {
+        display: block;
+        padding: 0 15mm; /* 좌우 여백 직접 적용 */
+        background: white !important;
+    }
+    
+    .letter-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    
+    /* 헤더 */
+    .letter-header {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+    
+    .letter-info {
+        font-size: 9pt;
+    }
+    
+    /* 본문 */
+    .letter-body {
+        font-size: 10pt;
+        line-height: 1.75;
+    }
+    
+    .letter-body p {
+        margin-bottom: 1.4rem;
+        orphans: 3;
+        widows: 3;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* 이미지 블록 - 페이지 경계에서 잘리지 않도록 */
+    .image-block {
+        margin: 2rem 0;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-before: auto;
+        page-break-after: auto;
+    }
+    
+    .image-block img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        display: block;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    .image-caption {
+        font-size: 8pt;
+        color: #555 !important;
+        margin-top: 0.5rem;
+        line-height: 1.5;
+        page-break-before: avoid;
+        break-before: avoid;
+    }
+    
+    /* figure + figcaption을 하나의 단위로 묶기 */
+    figure {
+        display: block;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    /* 서명 */
+    .letter-signature {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        page-break-before: avoid;
+    }
+    
+    /* 링크 */
+    a {
+        color: #000 !important;
+        text-decoration: none;
+        border-bottom: none;
+    }
+    
+    /* 스크롤바 숨기기 */
+    .card-back::-webkit-scrollbar {
+        display: none;
+    }
+}
+
