@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김재연 Jaeyeon Kim | 이력서 CV</title>
+    <style>
+        :root {
+            /* 780px 기준 vw 변환 (모바일~780px) */
+            --col1: 11.54vw;   /* 100px / 780 * 100 */
+            --col2: 9.23vw;   /* 100px / 780 * 100 */
+            --col3: 8.97vw;    /* 70px / 780 * 100 */
+            --col4: 1fr;
+            --col-role: 45%;
+            --gap: 1.54vw;     /* 12px / 780 * 100 */
+            --gap-half: 0.77vw; /* 6px / 780 * 100 */
+            --gap-small: 0.26vw; /* 2px / 780 * 100 */
+            --font-base: 1.54vw; /* 12px ≈ 9pt */
+            --font-small: 1.03vw; /* 8px ≈ 6pt */
+            --padding: 5.13vw; /* 40px / 780 * 100 */
+            --edu-year-width: 5.13vw; /* 40px / 780 * 100 */
+            --profile-height: 16.67vw; /* 130px / 780 * 100 */
+        }
+
+        /* 780px 이상: 고정 px 값으로 전환 */
+        @media (min-width: 800px) {
+            :root {
+                --col1: 100px;
+                --col2: 100px;
+                --col3: 70px;   
+                --gap: 12px;
+                --gap-half: 6px;
+                --gap-small: 2px;
+                --font-base: 9pt;
+                --font-small: 6pt;
+                --padding: 40px;
+                --edu-year-width: 40px;
+                --profile-height: 130px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif;
+            font-size: var(--font-base);
+            line-height: 1.55;
+            color: #000;
+            background: #fff;
+            padding: var(--padding);
+            max-width: 780px;
+            margin: 2rem auto;
+            border: 1px solid #000;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* ===== 헤더 ===== */
+        .header {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap-half);
+        }
+
+        .header-name {
+            width: var(--col1);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            width: var(--col2);
+            flex-shrink: 0;
+        }
+
+        .header-purpose {
+            flex: 1;
+        }
+
+        .header-date {
+            text-align: right;
+        }
+
+        /* ===== 프로필 + 인적사항 ===== */
+        .profile-row {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap-small);
+        }
+        .profile-row-top{
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap-small);
+            border-top: 1px solid #000;
+            padding-top: var(--gap-half);
+        }
+
+        .profile-image {
+            width: var(--col1);
+            flex-shrink: 0;
+        }
+
+        .profile-image-box {
+            width: var(--col1);
+            position: absolute;
+            height: var(--profile-height);
+            margin-top: var(--gap-half);
+            object-fit: cover;
+        }
+
+        .section-label {
+            width: var(--col2);
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            width: var(--col3);
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            flex: 1;
+        }
+
+        /* 빈 공간 유지 */
+        .empty-col1 {
+            width: var(--col1);
+            flex-shrink: 0;
+        }
+
+        .empty-col2 {
+            width: var(--col2);
+            flex-shrink: 0;
+        }
+
+        .empty-col3 {
+            width: var(--col3);
+            flex-shrink: 0;
+        }
+
+        /* ===== 학력사항 ===== */
+        .edu-row {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap-small);
+            position: relative;
+        }
+
+        .edu-row-top {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap-small);
+            position: relative;
+            border-top: 1px solid #000;
+            padding-top: var(--gap-half);
+        }
+
+        .edu-year {
+            position: absolute;
+            left: calc(var(--col1) + var(--gap) + var(--col2) - var(--edu-year-width));
+            width: var(--edu-year-width);
+            text-align: right;
+            vertical-align: super;
+            font-size: var(--font-small);
+            padding-top: 0.11vw;
+        }
+
+        .edu-content {
+            flex: 1;
+        }
+
+        /* ===== 경력사항 ===== */
+        .career-section {
+            margin-top: var(--gap-half);
+        }
+
+        /* 경력 헤더 행 */
+        .career-header {
+            display: flex;
+            gap: var(--gap);
+            border-top: 1px solid #000;
+            padding-top: var(--gap-half);
+        }
+
+        .career-header-title {
+            width: var(--col1);
+            flex-shrink: 0;
+        }
+
+
+        .career-header-col1 {
+            flex: 1;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        .career-header-col2 {
+            width: var(--col-role);
+            flex-shrink: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        /* 경력 테이블 행 */
+        .career-row {
+            display: flex;
+            gap: var(--gap);
+            padding: var(--gap-half) 0;
+        }
+
+        .career-date {
+            width: var(--col1);
+            flex-shrink: 0;
+            text-align: right;
+            vertical-align: super;
+            font-size: var(--font-small);
+            padding-top: 0.11vw;
+        }
+
+        .career-content {
+            flex: 1;
+        }
+
+        .career-role {
+            width: var(--col-role);
+            flex-shrink: 0;
+        }
+
+        /* 지원/전시 서브헤더 */
+        .sub-header {
+            display: flex;
+            gap: var(--gap);
+            margin-top: var(--gap);
+        }
+
+        .sub-header-empty {
+            width: var(--col1);
+            flex-shrink: 0;
+        }
+
+        .sub-header-col1 {
+            flex: 1;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        .sub-header-col2 {
+            width: var(--col-role);
+            flex-shrink: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        /* 전시 테이블 (3열: 장소 + 참여분야) */
+        .exhibit-header {
+            display: flex;
+            gap: var(--gap);
+            margin-top: var(--gap);
+        }
+
+        .exhibit-header-col1 {
+            flex: 1;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        .exhibit-header-col2 {
+            width: calc(var(--col-role) / 2);
+            flex-shrink: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+        }
+
+        .exhibit-header-col3 {
+            width: calc(var(--col-role) / 2);
+            flex-shrink: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: var(--gap-half);
+            margin-left: calc(var(--gap) * -1);
+        }
+
+        .exhibit-row {
+            display: flex;
+            gap: var(--gap);
+            padding: var(--gap-half) 0;
+        }
+
+        .exhibit-date {
+            width: var(--col1);
+            flex-shrink: 0;
+            text-align: right;
+            vertical-align: super;
+            font-size: var(--font-small);
+            padding-top: 0.11vw;
+        }
+
+        .exhibit-content {
+            flex: 1;
+        }
+
+        .exhibit-place {
+            width: calc(var(--col-role) / 2);
+            flex-shrink: 0;
+        }
+
+        .exhibit-role {
+            width: calc(var(--col-role) / 2);
+            flex-shrink: 0;
+            margin-left: calc(var(--gap) * -1);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #000;
+            margin-top: var(--gap-half);
+        }
+
+        @media print {
+            :root {
+                --col1: 100px;
+                --col2: 100px;
+                --col3: 70px;
+                --gap: 12px;
+                --gap-half: 6px;
+                --gap-small: 2px;
+                --font-base: 9pt;
+                --font-small: 6pt;
+                --padding: 40px;
+                --edu-year-width: 40px;
+                --profile-height: 130px;
+            }
+
+            body {
+                padding: 10mm;
+                max-width: 100%;
+                border: none; /* 인쇄 시 border 숨김 */
+                margin: 0 auto;
+            }
+
+            @page {
+                margin: 10mm;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <div class="header">
+        <div class="header-name">김재연</div>
+        <div class="header-title">⓪ 이력서</div>
+        <div class="header-purpose">학부인턴십 지원</div>
+        <div class="header-date">26.02.01.</div>
+    </div>
+
+    <!-- 프로필 + 기본 인적사항 (첫 줄: 사진 + 섹션제목 + 성명) -->
+    <div class="profile-image"><img src="profile.png" alt="김재연 프로필 사진" class="profile-image-box"></div>
+    <div class="profile-row-top">
+        <div class="empty-col1"></div>
+        <div class="section-label">① 기본 인적사항</div>
+        <div class="info-label">성명</div>
+        <div class="info-value">김재연 / 金宰演 / KIM JAE YEON</div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">생년월일</div>
+        <div class="info-value">1999.07.13.</div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">연락처</div>
+        <div class="info-value">+82) 10 7242 3155</div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">주소</div>
+        <div class="info-value">서울 동대문구 답십리로 27 (전농동) D동 4803호</div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">E-mail</div>
+        <div class="info-value"><a href="mailto:hi@jaeyeonkim.kr">hi@jaeyeonkim.kr</a></div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">웹사이트</div>
+        <div class="info-value"><a href="https://jaeyeonkim.kr">jaeyeonkim.kr</a></div>
+    </div>
+    <div class="profile-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="info-label">SNS</div>
+        <div class="info-value">Instagram <a href="https://www.instagram.com/jaeyeonkim.kr">@jaeyeonkim.kr</a></div>
+    </div>
+
+    <!-- 학력사항 -->
+    <div class="edu-row" style="margin-top: 12px;">
+        <div class="empty-col1"></div>
+        <div class="section-label">② 학력사항</div>
+        <div class="edu-year">2026</div>
+        <div class="edu-content"><a href="https://sidi.hongik.ac.kr/">홍익대학교 미술대학 시각디자인과</a> 졸업 전시 완료(졸업 요건 충족)</a></div>
+    </div>
+    <div class="edu-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="edu-year"></div>
+        <div class="edu-content">학사 학위 유예 신청 승인 완료</div>
+    </div>
+    <div class="edu-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="edu-year">2019</div>
+        <div class="edu-content"><a href="https://www.hongik.ac.kr/">홍익대학교(서울캠퍼스)</a> 입학</div>
+    </div>
+    <div class="edu-row">
+        <div class="empty-col1"></div>
+        <div class="empty-col2"></div>
+        <div class="edu-year">2018</div>
+        <div class="edu-content">신일고등학교 졸업</div>
+    </div>
+
+    <!-- 주요 경력사항 -->
+    <div class="career-section">
+        <!-- 근무 헤더 -->
+        <div class="career-header">
+            <div class="career-header-title">③ 주요 경력사항</div>
+            <div class="career-header-col1">근무</div>
+            <div class="career-header-col2">역할</div>
+        </div>
+
+        <div class="career-row">
+            <div class="career-date">24.11-25.04.</div>
+            <div class="career-content"><a href="https://drdr.ac/">두루두루아티스트컴퍼니</a> Creative Production 팀</a></div>
+            <div class="career-role">콘텐츠 디자이너, 공연 / 음반 / SNS 콘텐츠 디자인</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">23.01-24.09.</div>
+            <div class="career-content">대한민국해군 본부 정훈실 미디어콘텐츠과 디자인팀</div>
+            <div class="career-role">디자인병, 대한민국해군 관련 콘텐츠 디자인</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">22.08-forever.</div>
+            <div class="career-content"><a href="https://minguhongmfg.com/">민구홍 매뉴팩처링</a></div>
+            <div class="career-role">인턴, 웹 제작 도움 / 수업 조교, 홍익대 수업 보조</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">21.04-22.06.</div>
+            <div class="career-content">홍익대학교 시각디자인과 비대면 수업 콘텐츠 지원 사업</div>
+            <div class="career-role">뉴스레터 <a href="https://sidi-hongik-newsletter.xyz/">『홍익시디 소식지』</a> 디자인 및 개발</div>
+        </div>
+
+        <!-- 지원 헤더 -->
+        <div class="sub-header">
+            <div class="sub-header-empty"></div>
+            <div class="sub-header-col1">지원</div>
+            <div class="sub-header-col2">역할</div>
+        </div>
+
+        <div class="career-row">
+            <div class="career-date">24.06-24.08.</div>
+            <div class="career-content">장기하 라이브 앨범 〈하기장기하〉</div>
+            <div class="career-role">음반 디지털 / 피지컬 디자인 (아트워크: 민구홍)</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">24.11-25.01.</div>
+            <div class="career-content">카더가든 단독공연 〈From Apartment〉</div>
+            <div class="career-role">공연 포스터, 현수막 사이니지 등 홍보물 디자인</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">22.04-22.12.</div>
+            <div class="career-content">홍익대학교 미술대학 도예유리과 졸업전시 《Pigment》</div>
+            <div class="career-role">전시 포스터, 현수막 사이니지 등 홍보물 디자인</div>
+        </div>
+        <div class="career-row">
+            <div class="career-date">22.06-22.08.</div>
+            <div class="career-content">제품디자인 스튜디오 <a href="https://bkid.co/">BKID</a></div>
+            <div class="career-role">프리랜서 웹 디자인 / 개발 용역</div>
+        </div>
+
+        <!-- 전시 헤더 -->
+        <div class="exhibit-header">
+            <div class="sub-header-empty"></div>
+            <div class="exhibit-header-col1">전시</div>
+            <div class="exhibit-header-col2">장소</div>
+            <div class="exhibit-header-col3">참여 분야</div>
+        </div>
+
+        <div class="exhibit-row">
+            <div class="exhibit-date">26.01.</div>
+            <div class="exhibit-content">김재연·이승주·조승완 그룹전 《음향형태론》</div>
+            <div class="exhibit-place">하우스 영원 HAUS 01</div>
+            <div class="exhibit-role">기획 / 디자인 / 개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">25.12.</div>
+            <div class="exhibit-content">홍익대학교 시각디자인과 졸업전시 E반 《안녕 (⠀⠀⠀)》</div>
+            <div class="exhibit-place">홍익대학교 홍문관 7층</div>
+            <div class="exhibit-role">기획 / 개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">25.11.</div>
+            <div class="exhibit-content">한국디자인사학회 학술대회 연계 전시 《198X》</div>
+            <div class="exhibit-place">DDP 뮤지엄 둘레길 갤러리</div>
+            <div class="exhibit-role">[젊은 시선] 파트 개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">25.11.</div>
+            <div class="exhibit-content">디자인코리아 주제전 《디자인이 그리는 새로운 질서들》</div>
+            <div class="exhibit-place">코엑스 D홀</div>
+            <div class="exhibit-role">PWD 팀 소속, 개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">25.06.</div>
+            <div class="exhibit-content">PWD 그룹 기획전 《Latent Fields》</div>
+            <div class="exhibit-place">갤러리 17717</div>
+            <div class="exhibit-role">기획 / 개발 / 개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">24.11.</div>
+            <div class="exhibit-content">한국타이포그라피학회 전시 18 《조판공의 다리》</div>
+            <div class="exhibit-place">리얼레이션 스페이스</div>
+            <div class="exhibit-role">개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">23.11.</div>
+            <div class="exhibit-content">한국타이포그라피학회 전시 17 《앞으로!》</div>
+            <div class="exhibit-place">온라인</div>
+            <div class="exhibit-role">개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">22.11.</div>
+            <div class="exhibit-content">한국타이포그라피학회 전시 16 《진동새와 손편지》</div>
+            <div class="exhibit-place">온라인</div>
+            <div class="exhibit-role">개인 작품</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">22.07.</div>
+            <div class="exhibit-content">기획 전시 《THHA v1》</div>
+            <div class="exhibit-place">예술 실험 공간 Faction</div>
+            <div class="exhibit-role">2인 팀(gridroom) 작업</div>
+        </div>
+        <div class="exhibit-row">
+            <div class="exhibit-date">20.11.</div>
+            <div class="exhibit-content">단체전 《전염과 면역 Infection and Immunity》</div>
+            <div class="exhibit-place">두성페이퍼갤러리</div>
+            <div class="exhibit-role">개인(학생) 작품</div>
+        </div>
+    </div>
+
+    <hr class="divider">
+    
+    <script>
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                document.body.classList.add('loaded');
+            });
+        });
+    </script>
+</body>
+</html>
