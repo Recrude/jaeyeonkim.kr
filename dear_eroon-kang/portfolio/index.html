@@ -116,7 +116,7 @@
 </head>
 <body>
     <div id="viewer">
-        <img id="page-image" src="page-00.png" alt="Page 1">
+        <img id="page-image" src="webp/page-00.webp" alt="Page 1">
         <div class="nav-area nav-prev" id="navPrev"></div>
         <div class="nav-area nav-next" id="navNext"></div>
     </div>
@@ -146,7 +146,7 @@
                         loading.style.display = 'none';
                     }
                 };
-                img.src = `page-${String(i).padStart(2, '0')}.png`;
+                img.src = `webp/page-${String(i).padStart(2, '0')}.webp`;
                 preloadedImages[i] = img;
             }
         }
@@ -156,7 +156,7 @@
             if (pageNum < 0 || pageNum >= totalPages) return;
             
             currentPage = pageNum;
-            pageImage.src = `page-${String(pageNum).padStart(2, '0')}.png`;
+            pageImage.src = `webp/page-${String(pageNum).padStart(2, '0')}.webp`;
             showIndicator();
         }
 
