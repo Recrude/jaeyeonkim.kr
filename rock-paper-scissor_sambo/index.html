@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위 바위 보보 - 삼보</title>
+    <style>
+        @font-face {
+            font-family: 'AG안상수체2012';
+            src: url('ahn-sangsoo-bold.woff') format('woff');
+            font-weight: bold;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'AG안상수체2012', sans-serif;
+        }
+
+        #canvas {
+            display: block;
+            background: #000;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4vw 4vw;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .header.show {
+            opacity: 1;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .title-item {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #fff;
+            white-space: nowrap;
+            text-decoration: none;
+            pointer-events: auto;
+        }
+
+        .title-item:hover {
+            opacity: 0.7;
+        }
+
+        .stat-item {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #666;
+            width: 18vw;
+            text-align: left;
+            margin-left: 1.5vw;
+        }
+
+        .title-right {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #fff;
+            text-decoration: none;
+            pointer-events: auto;
+        }
+
+        .title-right:hover {
+            opacity: 0.7;
+        }
+
+        .winner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        .winner-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .winner-text {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 18vw;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* 미니멀 인트로 스타일 */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 200;
+            padding: 4vw 4vw;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .intro-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .intro-left {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .intro-left.show {
+            opacity: 1;
+        }
+
+        .intro-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .intro-title-item {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #fff;
+            white-space: nowrap;
+            text-decoration: none;
+            pointer-events: auto;
+        }
+
+        .intro-title-item:hover {
+            opacity: 0.7;
+        }
+
+        .intro-stat {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #666;
+            width: 18vw;
+            text-align: left;
+            margin-left: 1.5vw;
+        }
+
+        .intro-stat.rolling {
+            animation: statFlicker 0.1s infinite;
+        }
+
+        @keyframes statFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .intro-right {
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 6vw;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            text-decoration: none;
+            pointer-events: auto;
+        }
+
+        .intro-right.show {
+            opacity: 1;
+        }
+
+        .intro-right:hover {
+            opacity: 0.7;
+        }
+
+        .win-record {
+            position: fixed;
+            bottom: 4vw;
+            right: 4vw;
+            font-family: 'AG안상수체2012', sans-serif;
+            font-size: 2.5vw;
+            color: #fff;
+            opacity: 0.3;
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header">
+        <div class="title-section">
+            <div class="title-group">
+                <a class="title-item" href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%9C%84" target="_blank">가위</a>
+                <span class="stat-item" id="stat-scissors">영</span>
+            </div>
+            <div class="title-group">
+                <a class="title-item" href="https://ko.wikipedia.org/wiki/%EC%95%94%EC%84%9D" target="_blank">바위</a>
+                <span class="stat-item" id="stat-rock">영</span>
+            </div>
+            <div class="title-group">
+                <a class="title-item" href="https://ko.wikipedia.org/wiki/%EB%B3%B4" target="_blank">보보</a>
+                <span class="stat-item" id="stat-paper">영</span>
+            </div>
+        </div>
+        <a class="title-right" href="https://www.trigem.co.kr/" target="_blank">삼보</a>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="win-record" id="win-record">영 / 영 / 영</div>
+
+    <div class="winner-overlay" id="winner-overlay">
+        <div class="winner-text" id="winner-text"></div>
+    </div>
+
+    <div class="intro-overlay" id="intro-overlay">
+        <div class="intro-header">
+            <div class="intro-left" id="intro-left">
+                <div class="intro-group">
+                    <a class="intro-title-item" href="https://ko.wikipedia.org/wiki/%EA%B0%80%EC%9C%84" target="_blank">가위</a>
+                    <span class="intro-stat" id="intro-stat-1">영</span>
+                </div>
+                <div class="intro-group">
+                    <a class="intro-title-item" href="https://ko.wikipedia.org/wiki/%EC%95%94%EC%84%9D" target="_blank">바위</a>
+                    <span class="intro-stat" id="intro-stat-2">영</span>
+                </div>
+                <div class="intro-group">
+                    <a class="intro-title-item" href="https://ko.wikipedia.org/wiki/%EB%B3%B4" target="_blank">보보</a>
+                    <span class="intro-stat" id="intro-stat-3">영</span>
+                </div>
+            </div>
+            <a class="intro-right" id="intro-right" href="https://www.trigem.co.kr/" target="_blank">삼보</a>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const TYPES = {
+            SCISSORS: 'scissors',
+            ROCK: 'rock',
+            PAPER: 'paper'
+        };
+
+        const TYPE_NAMES = {
+            [TYPES.SCISSORS]: '가위',
+            [TYPES.ROCK]: '바위',
+            [TYPES.PAPER]: '보보'
+        };
+
+        const BEATS = {
+            [TYPES.SCISSORS]: TYPES.PAPER,
+            [TYPES.ROCK]: TYPES.SCISSORS,
+            [TYPES.PAPER]: TYPES.ROCK
+        };
+
+        const LOSES_TO = {
+            [TYPES.SCISSORS]: TYPES.ROCK,
+            [TYPES.ROCK]: TYPES.PAPER,
+            [TYPES.PAPER]: TYPES.SCISSORS
+        };
+
+        let particles = [];
+        let gameOver = false;
+        let winner = null;
+        let roundNumber = 1;
+        let isPlaying = false;
+        let textMetrics = {};
+
+        // 누적 승리 횟수
+        const winRecord = {
+            [TYPES.SCISSORS]: 0,
+            [TYPES.ROCK]: 0,
+            [TYPES.PAPER]: 0
+        };
+
+        const CONFIG_RANGES = {
+            maxSpeed: { min: 1.0, max: 2.0 },
+            detectionRadius: { min: 100, max: 200 }
+        };
+
+        let CONFIG = {
+            particleCount: 45,
+            fontSize: 22,
+            maxSpeed: 1.5,
+            minSpeed: 0.4,
+            chaseStrength: 0.015,
+            avoidStrength: 0.01,
+            detectionRadius: 150,
+            friction: 0.985,
+            randomness: 0.15,
+            separationRadius: 35,
+            separationStrength: 0.03
+        };
+
+        // 숫자를 한글로 변환
+        function numberToKorean(num) {
+            if (num === 0) return '영';
+            
+            const units = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+            const tensNames = ['', '십', '이십', '삼십', '사십', '오십', '육십', '칠십', '팔십', '구십'];
+            const hundredsNames = ['', '백', '이백', '삼백'];
+            
+            let result = '';
+            
+            if (num >= 100) {
+                result += hundredsNames[Math.floor(num / 100)];
+                num %= 100;
+            }
+            
+            if (num >= 10) {
+                result += tensNames[Math.floor(num / 10)];
+                num %= 10;
+            }
+            
+            if (num > 0) {
+                result += units[num];
+            }
+            
+            return result;
+        }
+
+        // 텍스트 크기 측정
+        function measureTextSizes() {
+            ctx.font = `bold ${CONFIG.fontSize}px 'AG안상수체2012', sans-serif`;
+            
+            let maxWidth = 0;
+            for (const type of Object.values(TYPES)) {
+                const text = TYPE_NAMES[type];
+                const metrics = ctx.measureText(text);
+                maxWidth = Math.max(maxWidth, metrics.width);
+            }
+            
+            for (const type of Object.values(TYPES)) {
+                textMetrics[type] = {
+                    width: maxWidth,
+                    height: CONFIG.fontSize
+                };
+            }
+        }
+
+        function randomInRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function randomFloat(min, max, decimals = 1) {
+            const val = Math.random() * (max - min) + min;
+            return parseFloat(val.toFixed(decimals));
+        }
+
+        // 개체 수 선정 (가중치 기반: 가끔 한자리수도 나옴)
+        function getRandomParticleCount() {
+            const rand = Math.random();
+            
+            if (rand < 0.1) {
+                // 10% 확률: 한자리수 (3~9)
+                return randomInRange(3, 9);
+            } else if (rand < 0.3) {
+                // 20% 확률: 10~29
+                return randomInRange(10, 29);
+            } else {
+                // 70% 확률: 30~60
+                return randomInRange(30, 60);
+            }
+        }
+
+        function generateNewConfig() {
+            CONFIG.particleCount = getRandomParticleCount();
+            CONFIG.maxSpeed = randomFloat(CONFIG_RANGES.maxSpeed.min, CONFIG_RANGES.maxSpeed.max);
+            CONFIG.detectionRadius = randomInRange(CONFIG_RANGES.detectionRadius.min, CONFIG_RANGES.detectionRadius.max);
+            CONFIG.chaseStrength = randomFloat(0.01, 0.025, 3);
+            CONFIG.avoidStrength = randomFloat(0.008, 0.015, 3);
+        }
+
+        async function playIntro() {
+            const overlay = document.getElementById('intro-overlay');
+            const introLeft = document.getElementById('intro-left');
+            const introRight = document.getElementById('intro-right');
+            const stats = [
+                document.getElementById('intro-stat-1'),
+                document.getElementById('intro-stat-2'),
+                document.getElementById('intro-stat-3')
+            ];
+
+            overlay.classList.remove('hide');
+            
+            // 이전 게임 정리 (화면 깔끔하게)
+            particles = [];
+            isPlaying = false;
+            gameOver = false;
+            winner = null;
+            
+            stats.forEach(s => {
+                s.classList.remove('rolling');
+                s.textContent = '영';
+            });
+
+            generateNewConfig();
+
+            await sleep(300);
+
+            // 한번에 등장
+            introLeft.classList.add('show');
+            introRight.classList.add('show');
+            await sleep(800);
+
+            stats.forEach(s => s.classList.add('rolling'));
+
+            const rollDuration = 2500;
+            const rollInterval = 100;
+            const startTime = Date.now();
+            const targetCount = CONFIG.particleCount;
+
+            await new Promise(resolve => {
+                const rollTimer = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    
+                    if (elapsed < rollDuration) {
+                        stats[0].textContent = numberToKorean(randomInRange(3, 60));
+                        stats[1].textContent = numberToKorean(randomInRange(3, 60));
+                        stats[2].textContent = numberToKorean(randomInRange(3, 60));
+                    } else {
+                        clearInterval(rollTimer);
+                        stats.forEach(s => s.classList.remove('rolling'));
+                        stats[0].textContent = numberToKorean(targetCount);
+                        stats[1].textContent = numberToKorean(targetCount);
+                        stats[2].textContent = numberToKorean(targetCount);
+                        resolve();
+                    }
+                }, rollInterval);
+            });
+
+            await sleep(800);
+
+            // 페이드아웃 전에 새 게임 준비 (파티클 생성)
+            prepareGame();
+            
+            // 헤더 숫자를 초기값으로 설정 (인트로 숫자와 동기화)
+            const initialCount = numberToKorean(CONFIG.particleCount);
+            document.getElementById('stat-scissors').textContent = initialCount;
+            document.getElementById('stat-rock').textContent = initialCount;
+            document.getElementById('stat-paper').textContent = initialCount;
+
+            await sleep(200);
+
+            // 페이드아웃 시작 (이미 새 게임이 준비됨)
+            overlay.classList.add('hide');
+            
+            // 페이드아웃 완료 후 게임 시작
+            await sleep(1000);
+            
+            isPlaying = true;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function checkAABBCollision(a, b) {
+            const aMetrics = textMetrics[a.type];
+            const bMetrics = textMetrics[b.type];
+            
+            const aLeft = a.x - aMetrics.width / 2;
+            const aRight = a.x + aMetrics.width / 2;
+            const aTop = a.y - aMetrics.height / 2;
+            const aBottom = a.y + aMetrics.height / 2;
+            
+            const bLeft = b.x - bMetrics.width / 2;
+            const bRight = b.x + bMetrics.width / 2;
+            const bTop = b.y - bMetrics.height / 2;
+            const bBottom = b.y + bMetrics.height / 2;
+            
+            return aLeft < bRight && aRight > bLeft && aTop < bBottom && aBottom > bTop;
+        }
+
+        class Particle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.vx = (Math.random() - 0.5) * CONFIG.maxSpeed * 2;
+                this.vy = (Math.random() - 0.5) * CONFIG.maxSpeed * 2;
+                // 충돌 시 번쩍임 효과 (주석 처리하려면 ENABLE_FLASH_EFFECT를 false로)
+                this.flashOpacity = 0;
+            }
+
+            // 번쩍임 트리거
+            triggerFlash() {
+                this.flashOpacity = 1;
+            }
+
+            // 번쩍임 감쇠
+            updateFlash() {
+                if (this.flashOpacity > 0) {
+                    this.flashOpacity *= 0.85; // 감쇠 속도
+                    if (this.flashOpacity < 0.05) this.flashOpacity = 0;
+                }
+            }
+
+            getWidth() {
+                return textMetrics[this.type]?.width || 44;
+            }
+
+            getHeight() {
+                return textMetrics[this.type]?.height || CONFIG.fontSize;
+            }
+
+            findTarget() {
+                const preyType = BEATS[this.type];
+                const predatorType = LOSES_TO[this.type];
+                
+                let nearestPrey = null;
+                let nearestPreyDist = Infinity;
+                let nearestPredator = null;
+                let nearestPredatorDist = Infinity;
+
+                for (const p of particles) {
+                    if (p === this) continue;
+                    
+                    const dx = p.x - this.x;
+                    const dy = p.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (p.type === preyType && dist < nearestPreyDist) {
+                        nearestPrey = p;
+                        nearestPreyDist = dist;
+                    }
+                    
+                    if (p.type === predatorType && dist < nearestPredatorDist) {
+                        nearestPredator = p;
+                        nearestPredatorDist = dist;
+                    }
+                }
+
+                return { nearestPrey, nearestPreyDist, nearestPredator, nearestPredatorDist };
+            }
+
+            update() {
+                const { nearestPrey, nearestPreyDist, nearestPredator, nearestPredatorDist } = this.findTarget();
+
+                if (nearestPrey && nearestPreyDist < CONFIG.detectionRadius) {
+                    const dx = nearestPrey.x - this.x;
+                    const dy = nearestPrey.y - this.y;
+                    const dist = Math.max(nearestPreyDist, 1);
+                    
+                    this.vx += (dx / dist) * CONFIG.chaseStrength;
+                    this.vy += (dy / dist) * CONFIG.chaseStrength;
+                }
+
+                if (nearestPredator && nearestPredatorDist < CONFIG.detectionRadius * 0.8) {
+                    const dx = this.x - nearestPredator.x;
+                    const dy = this.y - nearestPredator.y;
+                    const dist = Math.max(nearestPredatorDist, 1);
+                    
+                    this.vx += (dx / dist) * CONFIG.avoidStrength;
+                    this.vy += (dy / dist) * CONFIG.avoidStrength;
+                }
+
+                for (const p of particles) {
+                    if (p === this || p.type !== this.type) continue;
+                    
+                    const dx = this.x - p.x;
+                    const dy = this.y - p.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < CONFIG.separationRadius && dist > 0) {
+                        this.vx += (dx / dist) * CONFIG.separationStrength;
+                        this.vy += (dy / dist) * CONFIG.separationStrength;
+                    }
+                }
+
+                this.vx += (Math.random() - 0.5) * CONFIG.randomness;
+                this.vy += (Math.random() - 0.5) * CONFIG.randomness;
+
+                this.vx *= CONFIG.friction;
+                this.vy *= CONFIG.friction;
+
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > CONFIG.maxSpeed) {
+                    this.vx = (this.vx / speed) * CONFIG.maxSpeed;
+                    this.vy = (this.vy / speed) * CONFIG.maxSpeed;
+                }
+                if (speed < CONFIG.minSpeed && speed > 0) {
+                    this.vx = (this.vx / speed) * CONFIG.minSpeed;
+                    this.vy = (this.vy / speed) * CONFIG.minSpeed;
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                const halfWidth = this.getWidth() / 2;
+                const halfHeight = this.getHeight() / 2;
+                const padding = 20;
+                const headerHeight = window.innerWidth * 0.12;
+                
+                if (this.x < padding + halfWidth) {
+                    this.x = padding + halfWidth;
+                    this.vx *= -0.8;
+                }
+                if (this.x > canvas.width - padding - halfWidth) {
+                    this.x = canvas.width - padding - halfWidth;
+                    this.vx *= -0.8;
+                }
+                if (this.y < padding + headerHeight + halfHeight) {
+                    this.y = padding + headerHeight + halfHeight;
+                    this.vy *= -0.8;
+                }
+                if (this.y > canvas.height - padding - halfHeight) {
+                    this.y = canvas.height - padding - halfHeight;
+                    this.vy *= -0.8;
+                }
+            }
+
+            draw() {
+                ctx.font = `bold ${CONFIG.fontSize}px 'AG안상수체2012', sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                /* ========================================
+                   충돌 번쩍임 효과 (끄려면 아래 if문 주석 처리)
+                   ======================================== */
+                if (ENABLE_FLASH_EFFECT && this.flashOpacity > 0) {
+                    // 번쩍일 때 밝은 색상으로
+                    const brightness = Math.floor(255 + (this.flashOpacity * 0));
+                    const alpha = 0.3 + this.flashOpacity * 0.7;
+                    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                    // 글로우 효과
+                    ctx.shadowColor = '#ffffff';
+                    ctx.shadowBlur = this.flashOpacity * 15;
+                } else {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.shadowBlur = 0;
+                }
+                /* ======================================== */
+
+                ctx.fillText(TYPE_NAMES[this.type], this.x, this.y);
+                
+                // 그림자 리셋
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // 번쩍임 효과 ON/OFF (false로 바꾸면 효과 끔)
+        const ENABLE_FLASH_EFFECT = true;
+
+        // 게임 준비 (파티클 생성만, 아직 시작 안함)
+        function prepareGame() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            measureTextSizes();
+            
+            particles = [];
+            gameOver = false;
+            winner = null;
+            // isPlaying은 인트로 끝난 후 true로
+
+            document.getElementById('winner-overlay').classList.remove('show');
+            document.getElementById('header').classList.add('show');
+
+            const types = [TYPES.SCISSORS, TYPES.ROCK, TYPES.PAPER];
+            
+            const allTypes = [];
+            for (const type of types) {
+                for (let i = 0; i < CONFIG.particleCount; i++) {
+                    allTypes.push(type);
+                }
+            }
+            for (let i = allTypes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allTypes[i], allTypes[j]] = [allTypes[j], allTypes[i]];
+            }
+            
+            const headerHeight = window.innerWidth * 0.12;
+            const gridCols = Math.ceil(Math.sqrt(allTypes.length * (canvas.width / canvas.height)));
+            const gridRows = Math.ceil(allTypes.length / gridCols);
+            const cellWidth = (canvas.width - 80) / gridCols;
+            const cellHeight = (canvas.height - headerHeight - 80) / gridRows;
+            
+            for (let index = 0; index < allTypes.length; index++) {
+                const col = index % gridCols;
+                const row = Math.floor(index / gridCols);
+                const x = 40 + col * cellWidth + cellWidth / 2 + (Math.random() - 0.5) * cellWidth * 0.5;
+                const y = headerHeight + 40 + row * cellHeight + cellHeight / 2 + (Math.random() - 0.5) * cellHeight * 0.5;
+                particles.push(new Particle(x, y, allTypes[index]));
+            }
+        }
+
+        function checkCollisions() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i];
+                    const b = particles[j];
+
+                    if (a.type === b.type) continue;
+
+                    if (checkAABBCollision(a, b)) {
+                        if (BEATS[a.type] === b.type) {
+                            b.type = a.type;
+                            // 변환된 개체 번쩍임
+                            b.triggerFlash();
+                        } else if (BEATS[b.type] === a.type) {
+                            a.type = b.type;
+                            // 변환된 개체 번쩍임
+                            a.triggerFlash();
+                        }
+
+                        const dx = b.x - a.x;
+                        const dy = b.y - a.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                        const pushForce = 2;
+                        
+                        a.vx -= (dx / dist) * pushForce;
+                        a.vy -= (dy / dist) * pushForce;
+                        b.vx += (dx / dist) * pushForce;
+                        b.vy += (dy / dist) * pushForce;
+                    }
+                }
+            }
+        }
+
+        function updateStats() {
+            const counts = {
+                [TYPES.SCISSORS]: 0,
+                [TYPES.ROCK]: 0,
+                [TYPES.PAPER]: 0
+            };
+
+            for (const p of particles) {
+                counts[p.type]++;
+            }
+
+            document.getElementById('stat-scissors').textContent = numberToKorean(counts[TYPES.SCISSORS]);
+            document.getElementById('stat-rock').textContent = numberToKorean(counts[TYPES.ROCK]);
+            document.getElementById('stat-paper').textContent = numberToKorean(counts[TYPES.PAPER]);
+
+            const nonZeroCounts = Object.entries(counts).filter(([_, count]) => count > 0);
+            if (nonZeroCounts.length === 1 && !gameOver) {
+                gameOver = true;
+                winner = nonZeroCounts[0][0];
+                showWinner();
+            }
+        }
+
+        function updateWinRecord() {
+            const recordEl = document.getElementById('win-record');
+            recordEl.textContent = `${numberToKorean(winRecord[TYPES.SCISSORS])} / ${numberToKorean(winRecord[TYPES.ROCK])} / ${numberToKorean(winRecord[TYPES.PAPER])}`;
+        }
+
+        async function showWinner() {
+            // 승리 횟수 증가
+            winRecord[winner]++;
+            updateWinRecord();
+
+            const overlay = document.getElementById('winner-overlay');
+            const text = document.getElementById('winner-text');
+            text.textContent = TYPE_NAMES[winner];
+            overlay.classList.add('show');
+
+            await sleep(4000);
+            
+            overlay.classList.remove('show');
+            // 헤더는 계속 보이도록 (숨기지 않음)
+            
+            await sleep(1000);
+            
+            roundNumber++;
+            await startGame();
+        }
+
+        async function startGame() {
+            // playIntro 내부에서 prepareGame 호출 및 isPlaying = true 처리
+            await playIntro();
+        }
+
+        function animate() {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (isPlaying && !gameOver) {
+                for (const p of particles) {
+                    p.update();
+                    // 번쩍임 효과 업데이트
+                    if (ENABLE_FLASH_EFFECT) p.updateFlash();
+                }
+                checkCollisions();
+            }
+
+            for (const p of particles) {
+                p.draw();
+            }
+
+            if (isPlaying) {
+                updateStats();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            measureTextSizes();
+        });
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        animate();
+        startGame();
+    </script>
+</body>
+</html>
