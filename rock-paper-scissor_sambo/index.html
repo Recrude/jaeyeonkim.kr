@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가위, 바위, 보보, 삼보.</title>
+    <title>가위 바위 보보 - 삼보</title>
     <style>
         @font-face {
             font-family: 'AG안상수체2012';
@@ -222,6 +222,98 @@
             z-index: 5;
             pointer-events: none;
         }
+
+        /* 가로 비율 (landscape) 미디어쿼리 */
+        @media (orientation: landscape) {
+            .header {
+                padding: 2.5vh 3vh;
+            }
+
+            .title-item {
+                font-size: 5vh;
+            }
+
+            .stat-item {
+                font-size: 5vh;
+                width: 15vh;
+                margin-left: 1vh;
+            }
+
+            .title-right {
+                font-size: 5vh;
+            }
+
+            .intro-overlay {
+                padding: 2.5vh 3vh;
+            }
+
+            .intro-title-item {
+                font-size: 5vh;
+            }
+
+            .intro-stat {
+                font-size: 5vh;
+                width: 15vh;
+                margin-left: 1vh;
+            }
+
+            .intro-right {
+                font-size: 5vh;
+            }
+
+            .winner-text {
+                font-size: 15vh;
+            }
+
+            .win-record {
+                bottom: 3vh;
+                right: 3vh;
+                font-size: 2vh;
+            }
+        }
+
+        /* 아주 넓은 가로 화면 (21:9 등) 대응 */
+        @media (min-aspect-ratio: 2/1) {
+            .header {
+                padding: 2vh 4vh;
+            }
+
+            .title-item {
+                font-size: 4.5vh;
+            }
+
+            .stat-item {
+                font-size: 4.5vh;
+                width: 13vh;
+                margin-left: 0.8vh;
+            }
+
+            .title-right {
+                font-size: 4.5vh;
+            }
+
+            .intro-overlay {
+                padding: 2vh 4vh;
+            }
+
+            .intro-title-item {
+                font-size: 4.5vh;
+            }
+
+            .intro-stat {
+                font-size: 4.5vh;
+                width: 13vh;
+                margin-left: 0.8vh;
+            }
+
+            .intro-right {
+                font-size: 4.5vh;
+            }
+
+            .winner-text {
+                font-size: 12vh;
+            }
+        }
     </style>
 </head>
 <body>
@@ -313,22 +405,68 @@
             [TYPES.PAPER]: 0
         };
 
-        const CONFIG_RANGES = {
+        // 기준 해상도 (443x976에서 fontSize 22px가 적당)
+        const BASE_WIDTH = 443;
+        const BASE_FONT_SIZE = 22;
+        
+        // 화면 크기에 따른 스케일 계산 (가로/세로 모드 대응)
+        function getScale() {
+            const isLandscape = window.innerWidth > window.innerHeight;
+            if (isLandscape) {
+                // 가로 모드: 높이 기준으로 스케일 계산
+                const baseHeight = 976;
+                return window.innerHeight / baseHeight;
+            }
+            return window.innerWidth / BASE_WIDTH;
+        }
+        
+        // 스케일된 폰트 사이즈 계산
+        function getScaledFontSize() {
+            const isLandscape = window.innerWidth > window.innerHeight;
+            if (isLandscape) {
+                // 가로 모드: 높이 기준으로 폰트 사이즈 계산
+                const baseHeight = 976;
+                return BASE_FONT_SIZE * (window.innerHeight / baseHeight);
+            }
+            return BASE_FONT_SIZE * getScale();
+        }
+
+        // 가로/세로 비율에 따른 헤더 높이 계산
+        function getHeaderHeight() {
+            const isLandscape = window.innerWidth > window.innerHeight;
+            if (isLandscape) {
+                // 가로 모드: vh 기준으로 계산 (CSS와 동기화)
+                return window.innerHeight * 0.1;
+            } else {
+                // 세로 모드: vw 기준으로 계산 (기존 방식)
+                return window.innerWidth * 0.12;
+            }
+        }
+
+        // 기준 해상도 기반 CONFIG (443px 너비 기준)
+        const BASE_CONFIG = {
             maxSpeed: { min: 1.0, max: 2.0 },
-            detectionRadius: { min: 100, max: 200 }
+            minSpeed: 0.4,
+            detectionRadius: { min: 100, max: 200 },
+            separationRadius: 35,
+            randomness: 0.15
         };
 
         let CONFIG = {
             particleCount: 45,
-            fontSize: 22,
-            maxSpeed: 1.5,
-            minSpeed: 0.4,
+            get fontSize() { return getScaledFontSize(); },
+            _maxSpeedBase: 1.5,
+            get maxSpeed() { return this._maxSpeedBase * getScale(); },
+            set maxSpeed(val) { this._maxSpeedBase = val / getScale(); },
+            get minSpeed() { return BASE_CONFIG.minSpeed * getScale(); },
             chaseStrength: 0.015,
             avoidStrength: 0.01,
-            detectionRadius: 150,
+            _detectionRadiusBase: 150,
+            get detectionRadius() { return this._detectionRadiusBase * getScale(); },
+            set detectionRadius(val) { this._detectionRadiusBase = val / getScale(); },
             friction: 0.985,
-            randomness: 0.15,
-            separationRadius: 35,
+            get randomness() { return BASE_CONFIG.randomness * getScale(); },
+            get separationRadius() { return BASE_CONFIG.separationRadius * getScale(); },
             separationStrength: 0.03
         };
 
@@ -405,8 +543,9 @@
 
         function generateNewConfig() {
             CONFIG.particleCount = getRandomParticleCount();
-            CONFIG.maxSpeed = randomFloat(CONFIG_RANGES.maxSpeed.min, CONFIG_RANGES.maxSpeed.max);
-            CONFIG.detectionRadius = randomInRange(CONFIG_RANGES.detectionRadius.min, CONFIG_RANGES.detectionRadius.max);
+            // 기준 해상도 기반 값 설정 (스케일은 getter에서 자동 적용)
+            CONFIG._maxSpeedBase = randomFloat(BASE_CONFIG.maxSpeed.min, BASE_CONFIG.maxSpeed.max);
+            CONFIG._detectionRadiusBase = randomInRange(BASE_CONFIG.detectionRadius.min, BASE_CONFIG.detectionRadius.max);
             CONFIG.chaseStrength = randomFloat(0.01, 0.025, 3);
             CONFIG.avoidStrength = randomFloat(0.008, 0.015, 3);
         }
@@ -629,8 +768,8 @@
 
                 const halfWidth = this.getWidth() / 2;
                 const halfHeight = this.getHeight() / 2;
-                const padding = 20;
-                const headerHeight = window.innerWidth * 0.12;
+                const padding = 20 * getScale(); // 스케일에 맞게 조정
+                const headerHeight = getHeaderHeight();
                 
                 if (this.x < padding + halfWidth) {
                     this.x = padding + halfWidth;
@@ -710,17 +849,19 @@
                 [allTypes[i], allTypes[j]] = [allTypes[j], allTypes[i]];
             }
             
-            const headerHeight = window.innerWidth * 0.12;
+            const headerHeight = getHeaderHeight();
+            const scale = getScale();
+            const padding = 40 * scale;
             const gridCols = Math.ceil(Math.sqrt(allTypes.length * (canvas.width / canvas.height)));
             const gridRows = Math.ceil(allTypes.length / gridCols);
-            const cellWidth = (canvas.width - 80) / gridCols;
-            const cellHeight = (canvas.height - headerHeight - 80) / gridRows;
+            const cellWidth = (canvas.width - padding * 2) / gridCols;
+            const cellHeight = (canvas.height - headerHeight - padding * 2) / gridRows;
             
             for (let index = 0; index < allTypes.length; index++) {
                 const col = index % gridCols;
                 const row = Math.floor(index / gridCols);
-                const x = 40 + col * cellWidth + cellWidth / 2 + (Math.random() - 0.5) * cellWidth * 0.5;
-                const y = headerHeight + 40 + row * cellHeight + cellHeight / 2 + (Math.random() - 0.5) * cellHeight * 0.5;
+                const x = padding + col * cellWidth + cellWidth / 2 + (Math.random() - 0.5) * cellWidth * 0.5;
+                const y = headerHeight + padding + row * cellHeight + cellHeight / 2 + (Math.random() - 0.5) * cellHeight * 0.5;
                 particles.push(new Particle(x, y, allTypes[index]));
             }
         }
@@ -747,7 +888,7 @@
                         const dx = b.x - a.x;
                         const dy = b.y - a.y;
                         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-                        const pushForce = 2;
+                        const pushForce = 2 * getScale();
                         
                         a.vx -= (dx / dist) * pushForce;
                         a.vy -= (dy / dist) * pushForce;
