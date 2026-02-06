@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김재연 Jaeyeon Kim | 포트폴리오 Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        body {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+
+        #viewer {
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #page-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+            background: #fff;
+        }
+
+        /* 네비게이션 영역 (투명) */
+        .nav-area {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .nav-prev {
+            left: 0;
+        }
+
+        .nav-next {
+            right: 0;
+        }
+
+        /* 페이지 인디케이터 */
+        #page-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+            font-size: 12px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        #page-indicator.show {
+            opacity: 1;
+        }
+
+        /* 로딩 */
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+            font-size: 14px;
+            z-index: 30;
+        }
+
+        /* 모바일 세로 모드: 90도 회전 */
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            body {
+                width: 100vh;
+                height: 100vw;
+                transform: rotate(90deg);
+                transform-origin: left top;
+                position: absolute;
+                top: 0;
+                left: 100%;
+                overflow: hidden;
+            }
+
+            #page-indicator {
+                bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="viewer">
+        <img id="page-image" src="webp/page-00.webp" alt="Page 1">
+        <div class="nav-area nav-prev" id="navPrev"></div>
+        <div class="nav-area nav-next" id="navNext"></div>
+    </div>
+    <div id="page-indicator"></div>
+    <div id="loading">로딩 중...</div>
+
+    <script>
+        // 설정
+        const totalPages = 60; // page-00.png ~ page-59.png
+        let currentPage = 0;
+        
+        // 요소
+        const pageImage = document.getElementById('page-image');
+        const pageIndicator = document.getElementById('page-indicator');
+        const loading = document.getElementById('loading');
+
+        // 이미지 프리로드
+        const preloadedImages = [];
+        let loadedCount = 0;
+
+        function preloadImages() {
+            for (let i = 0; i < totalPages; i++) {
+                const img = new Image();
+                img.onload = () => {
+                    loadedCount++;
+                    if (loadedCount === totalPages) {
+                        loading.style.display = 'none';
+                    }
+                };
+                img.src = `webp/page-${String(i).padStart(2, '0')}.webp`;
+                preloadedImages[i] = img;
+            }
+        }
+
+        // 페이지 표시
+        function showPage(pageNum) {
+            if (pageNum < 0 || pageNum >= totalPages) return;
+            
+            currentPage = pageNum;
+            pageImage.src = `webp/page-${String(pageNum).padStart(2, '0')}.webp`;
+            showIndicator();
+        }
+
+        // 이전 페이지
+        function prevPage() {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+            }
+        }
+
+        // 다음 페이지
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                showPage(currentPage + 1);
+            }
+        }
+
+        // 페이지 인디케이터
+        let indicatorTimeout;
+        function showIndicator() {
+            pageIndicator.textContent = `${currentPage + 1} / ${totalPages}`;
+            pageIndicator.classList.add('show');
+            
+            clearTimeout(indicatorTimeout);
+            indicatorTimeout = setTimeout(() => {
+                pageIndicator.classList.remove('show');
+            }, 1500);
+        }
+
+        // 클릭 이벤트
+        document.getElementById('navPrev').addEventListener('click', prevPage);
+        document.getElementById('navNext').addEventListener('click', nextPage);
+
+        // 키보드 이벤트
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevPage();
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextPage();
+            }
+        });
+
+        // 첫 이미지 로드 완료 시
+        pageImage.onload = () => {
+            loading.style.display = 'none';
+            showIndicator();
+        };
+
+        // 초기화
+        preloadImages();
+        showPage(0);
+        
+        // 인트로 트랜지션
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                document.body.classList.add('loaded');
+            });
+        });
+    </script>
+</body>
+</html>
