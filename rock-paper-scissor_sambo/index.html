@@ -355,7 +355,7 @@
                     <span class="intro-stat" id="intro-stat-2">영</span>
                 </div>
                 <div class="intro-group">
-                    <a class="intro-title-item" href="https://ko.wikipedia.org/wiki/%EB%B3%B4%EC%9E%90%EA%B8%B0" target="_blank">보보</a>
+                    <a class="intro-title-item" href="https://ko.wikipedia.org/wiki/%EB%B3%B4" target="_blank">보보</a>
                     <span class="intro-stat" id="intro-stat-3">영</span>
                 </div>
             </div>
@@ -472,28 +472,52 @@
 
         // 숫자를 한글로 변환
         function numberToKorean(num) {
+            if (!Number.isFinite(num)) return '영';
+
+            num = Math.floor(Math.abs(num));
             if (num === 0) return '영';
-            
-            const units = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
-            const tensNames = ['', '십', '이십', '삼십', '사십', '오십', '육십', '칠십', '팔십', '구십'];
-            const hundredsNames = ['', '백', '이백', '삼백'];
-            
+
+            const digits = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+            const smallUnits = ['', '십', '백', '천'];
+            const largeUnits = ['', '만', '억', '조'];
+
+            function convertUnder10000(value) {
+                let chunk = '';
+                const chunkDigits = String(value).padStart(4, '0');
+
+                for (let i = 0; i < chunkDigits.length; i++) {
+                    const digit = Number(chunkDigits[i]);
+                    if (digit === 0) continue;
+
+                    const unit = smallUnits[chunkDigits.length - 1 - i];
+                    if (digit === 1 && unit !== '') {
+                        chunk += unit;
+                    } else {
+                        chunk += digits[digit] + unit;
+                    }
+                }
+
+                return chunk;
+            }
+
             let result = '';
-            
-            if (num >= 100) {
-                result += hundredsNames[Math.floor(num / 100)];
-                num %= 100;
+            let unitIndex = 0;
+
+            while (num > 0 && unitIndex < largeUnits.length) {
+                const chunk = num % 10000;
+
+                if (chunk > 0) {
+                    const chunkText =
+                        chunk === 1 && unitIndex > 0
+                            ? largeUnits[unitIndex]
+                            : `${convertUnder10000(chunk)}${largeUnits[unitIndex]}`;
+                    result = `${chunkText}${result}`;
+                }
+
+                num = Math.floor(num / 10000);
+                unitIndex++;
             }
-            
-            if (num >= 10) {
-                result += tensNames[Math.floor(num / 10)];
-                num %= 10;
-            }
-            
-            if (num > 0) {
-                result += units[num];
-            }
-            
+
             return result;
         }
 
