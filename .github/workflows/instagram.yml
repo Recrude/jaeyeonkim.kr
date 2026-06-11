@@ -1,0 +1,63 @@
+name: Sync Instagram
+
+on:
+  # The "build button": run manually from the Actions tab after posting.
+  workflow_dispatch:
+  # Weekly token keep-alive (long-lived tokens expire after 60 days).
+  # Refresh-only: it never commits content on its own.
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch Instagram media
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: node scripts/fetch-instagram.mjs
+
+      - name: Commit and push changes
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No new posts."
+          else
+            git commit -m "Sync Instagram posts"
+            git push
+          fi
+
+      # Refreshing returns a token valid for another 60 days. Persisting it
+      # back into the repo secret needs a fine-grained PAT (secret GH_PAT)
+      # because the default GITHUB_TOKEN cannot write secrets. Without
+      # GH_PAT this step only warns about the upcoming expiry.
+      - name: Refresh access token
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          RESPONSE=$(curl -sf "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${IG_ACCESS_TOKEN}") || {
+            echo "::warning::Token refresh failed — the token may be expired. Re-issue it in the Meta app dashboard."
+            exit 0
+          }
+          NEW_TOKEN=$(echo "$RESPONSE" | jq -r .access_token)
+          EXPIRES_DAYS=$(( $(echo "$RESPONSE" | jq -r .expires_in) / 86400 ))
+          if [ -n "$GH_PAT" ]; then
+            echo "$NEW_TOKEN" | GH_TOKEN=$GH_PAT gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY"
+            echo "Token refreshed and stored (valid ~${EXPIRES_DAYS} days)."
+          else
+            echo "::warning::Token refreshed but NOT stored (no GH_PAT secret). Current secret expires in <60 days."
+          fi
