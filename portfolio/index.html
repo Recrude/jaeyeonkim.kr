@@ -41,7 +41,8 @@
             object-fit: contain;
             user-select: none;
             -webkit-user-drag: none;
-            background: #fff;
+            /* 배경을 깔지 않는다. src 를 갈아끼우는 한 프레임 동안
+               이 배경색이 그대로 비쳐 페이지를 넘길 때마다 깜빡였다. */
         }
 
         /* 네비게이션 영역 (투명) */
@@ -136,7 +137,7 @@
         // 이미지 프리로드: 현재 페이지 ±PRELOAD 장만 받는다.
         // 79장을 한꺼번에 요청하면 HTTP/2 멀티플렉싱 때문에 지금 보는 장이
         // 나머지 78장과 대역폭을 나눠 갖게 되어 첫 장부터 느려진다.
-        const PRELOAD = 2;
+        const PRELOAD = 6;
         const srcOf = (i) => `webp/page-${String(i).padStart(2, '0')}.webp`;
 
         // 한 번 받은 이미지는 붙잡아 둔다(되돌아갈 때 재요청·재디코드 없음)
@@ -163,28 +164,39 @@
         }
 
         // 페이지 표시
-        function showPage(pageNum) {
+        // src 를 바로 갈아끼우면 새 프레임이 준비될 때까지 화면이 한 번 비어
+        // 넘길 때마다 깜빡인다. 디코드가 끝난 뒤에 바꿔 끼운다.
+        let showToken = 0;
+        async function showPage(pageNum) {
             if (pageNum < 0 || pageNum >= totalPages) return;
 
+            const token = ++showToken;
             currentPage = pageNum;
-            const img = preload(pageNum, 'high');
-            const ready = img.complete && img.naturalWidth > 0;
-
-            loading.style.display = ready ? 'none' : 'block';
-            pageImage.src = srcOf(pageNum);
             showIndicator();
 
-            // 지금 보는 장이 다 받아진 뒤에 이웃을 받는다.
-            // 동시에 받으면 정작 화면에 띄울 장이 대역폭을 뺏긴다.
-            if (ready) {
-                preloadNeighbors(pageNum);
-            } else {
-                const then = () => {
-                    if (currentPage === pageNum) preloadNeighbors(pageNum);
-                };
-                img.addEventListener('load', then, { once: true });
-                img.addEventListener('error', then, { once: true });
+            const img = preload(pageNum, 'high');
+            const ready = img.complete && img.naturalWidth > 0;
+            loading.style.display = ready ? 'none' : 'block';
+
+            try {
+                await img.decode();
+            } catch (e) {
+                if (token === showToken) {
+                    loading.textContent = '이미지를 불러오지 못했습니다';
+                    loading.style.display = 'block';
+                }
+                return;
             }
+
+            // 기다리는 사이 다른 장으로 넘어갔으면 이 결과는 버린다
+            if (token !== showToken) return;
+
+            pageImage.src = img.src;
+            loading.style.display = 'none';
+
+            // 지금 보는 장을 띄운 뒤에 이웃을 받는다.
+            // 동시에 받으면 정작 화면에 띄울 장이 대역폭을 뺏긴다.
+            preloadNeighbors(pageNum);
         }
 
         // 이전 페이지
