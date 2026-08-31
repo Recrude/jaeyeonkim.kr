@@ -116,7 +116,7 @@
 </head>
 <body>
     <div id="viewer">
-        <img id="page-image" src="webp/page-00.webp" alt="Page 1">
+        <img id="page-image" src="webp/page-00.webp" alt="Page 1" fetchpriority="high" decoding="async">
         <div class="nav-area nav-prev" id="navPrev"></div>
         <div class="nav-area nav-next" id="navNext"></div>
     </div>
@@ -133,31 +133,58 @@
         const pageIndicator = document.getElementById('page-indicator');
         const loading = document.getElementById('loading');
 
-        // 이미지 프리로드
-        const preloadedImages = [];
-        let loadedCount = 0;
+        // 이미지 프리로드: 현재 페이지 ±PRELOAD 장만 받는다.
+        // 79장을 한꺼번에 요청하면 HTTP/2 멀티플렉싱 때문에 지금 보는 장이
+        // 나머지 78장과 대역폭을 나눠 갖게 되어 첫 장부터 느려진다.
+        const PRELOAD = 2;
+        const srcOf = (i) => `webp/page-${String(i).padStart(2, '0')}.webp`;
 
-        function preloadImages() {
-            for (let i = 0; i < totalPages; i++) {
-                const img = new Image();
-                img.onload = () => {
-                    loadedCount++;
-                    if (loadedCount === totalPages) {
-                        loading.style.display = 'none';
-                    }
-                };
-                img.src = `webp/page-${String(i).padStart(2, '0')}.webp`;
-                preloadedImages[i] = img;
+        // 한 번 받은 이미지는 붙잡아 둔다(되돌아갈 때 재요청·재디코드 없음)
+        const cache = new Map();
+
+        function preload(i, priority) {
+            if (i < 0 || i >= totalPages) return null;
+            let img = cache.get(i);
+            if (img) return img;
+            img = new Image();
+            img.decoding = 'async';
+            if ('fetchPriority' in img) img.fetchPriority = priority;
+            img.src = srcOf(i);
+            cache.set(i, img);
+            return img;
+        }
+
+        // 가까운 쪽부터, 다음 장을 이전 장보다 먼저
+        function preloadNeighbors(center) {
+            for (let d = 1; d <= PRELOAD; d++) {
+                preload(center + d, 'low');
+                preload(center - d, 'low');
             }
         }
 
         // 페이지 표시
         function showPage(pageNum) {
             if (pageNum < 0 || pageNum >= totalPages) return;
-            
+
             currentPage = pageNum;
-            pageImage.src = `webp/page-${String(pageNum).padStart(2, '0')}.webp`;
+            const img = preload(pageNum, 'high');
+            const ready = img.complete && img.naturalWidth > 0;
+
+            loading.style.display = ready ? 'none' : 'block';
+            pageImage.src = srcOf(pageNum);
             showIndicator();
+
+            // 지금 보는 장이 다 받아진 뒤에 이웃을 받는다.
+            // 동시에 받으면 정작 화면에 띄울 장이 대역폭을 뺏긴다.
+            if (ready) {
+                preloadNeighbors(pageNum);
+            } else {
+                const then = () => {
+                    if (currentPage === pageNum) preloadNeighbors(pageNum);
+                };
+                img.addEventListener('load', then, { once: true });
+                img.addEventListener('error', then, { once: true });
+            }
         }
 
         // 이전 페이지
@@ -200,14 +227,16 @@
             }
         });
 
-        // 첫 이미지 로드 완료 시
+        // 이미지 로드 완료 시
         pageImage.onload = () => {
             loading.style.display = 'none';
             showIndicator();
         };
+        pageImage.onerror = () => {
+            loading.textContent = '이미지를 불러오지 못했습니다';
+        };
 
         // 초기화
-        preloadImages();
         showPage(0);
         
         // 인트로 트랜지션
