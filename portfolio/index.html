@@ -178,9 +178,15 @@
             const ready = img.complete && img.naturalWidth > 0;
             loading.style.display = ready ? 'none' : 'block';
 
-            try {
-                await img.decode();
-            } catch (e) {
+            // 탭이 가려져 있으면 decode() 가 풀리지 않는 브라우저가 있다.
+            // 일정 시간이 지나면 기다리지 않고 그냥 바꿔 끼운다.
+            let failed = false;
+            await Promise.race([
+                img.decode().catch(() => { failed = true; }),
+                new Promise(r => setTimeout(r, 500))
+            ]);
+
+            if (failed) {
                 if (token === showToken) {
                     loading.textContent = '이미지를 불러오지 못했습니다';
                     loading.style.display = 'block';
