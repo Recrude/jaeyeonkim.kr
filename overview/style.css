@@ -1,3 +1,12 @@
+/* AG 최정호 스크린 — 자체 호스팅 (Adobe Fonts 킷 dpu3tmk 대체) */
+@font-face {
+    font-family: agchoijeongho-screen;
+    src: url("/assets/webfont/ag-choijeongho-screen/ag-choijeonghoscreen-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 *,
 *::before,
 *::after {

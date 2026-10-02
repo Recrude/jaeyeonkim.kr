@@ -47,7 +47,7 @@ html {
 
 body{
 /*  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;*/
-    font-family: "futura-100-book", sans-serif;
+    font-family: Futura, sans-serif;
     word-spacing: -.1rem;
     letter-spacing: -0.1rem;
     font-weight: 400;
@@ -61,7 +61,7 @@ body{
     line-height: 1.2;
 }
 .bold {
-  font-family: "futura-100", sans-serif;
+  font-family: Futura, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -79,7 +79,7 @@ li {
   line-height: 1.0;
   font-weight: 400;
   font-style: normal;
-  font-family: "futura-100", sans-serif;
+  font-family: Futura, sans-serif;
 }
 .unactive {
   color: gray;
