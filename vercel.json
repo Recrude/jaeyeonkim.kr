@@ -1,4 +1,22 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/presentation",
+      "destination": "/presentations/",
+      "permanent": true
+    },
+    {
+      "source": "/presentation/index.html",
+      "destination": "/presentations/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/presentations/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/:path*"
+    }
+  ]
 }
