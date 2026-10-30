@@ -1,0 +1,11 @@
+{
+  "name": "jaeyeonkim-homepage",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@vercel/functions": "3.6.1"
+  }
+}
