@@ -3,7 +3,7 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/presentation",
+      "source": "/presentation/",
       "destination": "/presentations/",
       "permanent": true
     },
@@ -17,6 +17,10 @@
     {
       "source": "/presentations/:path*",
       "destination": "https://presentation-wine-ten.vercel.app/presentations/:path*"
+    },
+    {
+      "source": "/presentations/:path*/",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/:path*/"
     }
   ]
 }
