@@ -6,7 +6,7 @@ const COOKIE = '__Secure-presentation-edit';
 const HOURS = 8;
 const failures = new Map();
 const privateHeaders = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Vary': 'Cookie', 'Referrer-Policy': 'same-origin' };
-function settings() {
+export function authSettings() {
   try {
     const value = JSON.parse(process.env.PRESENTATION_AUTH || 'null');
     if (!value || !/^[a-f0-9]{32}$/.test(value.salt) || !/^[a-f0-9]{64}$/.test(value.hash) || !/^[a-f0-9]{64}$/.test(value.sessionKey)) return null;
@@ -40,10 +40,10 @@ export async function handleAuth(request) {
   try { path = decodeURIComponent(url.pathname).replace(/\/+/g,'/').replace(/\/+$/,''); }
   catch { return new Response(null,{status:400,headers:privateHeaders}); }
   const editing = /^\/presentations\/edit(?:\/|$)/.test(path) || path === '/presentations/migrate';
-  const capture = path === '/presentations/api/capture' || path === '/api/capture';
+  const capture = ['/presentations/api/capture','/api/capture','/presentations/api/publish','/api/publish'].includes(path);
   const login = path === '/presentations/login', logout = path === '/presentations/logout', session = path === '/presentations/auth/session';
   if (!editing && !capture && !login && !logout && !session) return null;
-  const config = settings();
+  const config = authSettings();
   if (!config) return new Response('편집 로그인을 준비하고 있습니다. 잠시 후 다시 시도하세요.',{status:503,headers:privateHeaders});
   const authenticated = sessionValid(request,config);
   if (session) return Response.json({authenticated},{headers:privateHeaders});

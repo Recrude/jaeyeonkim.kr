@@ -15,6 +15,10 @@
   ],
   "rewrites": [
     {
+      "source": "/presentations/api/publish/",
+      "destination": "https://presentation-wine-ten.vercel.app/api/publish/"
+    },
+    {
       "source": "/presentations/assets/:path*",
       "destination": "https://presentation-wine-ten.vercel.app/presentations/assets/:path*"
     },
