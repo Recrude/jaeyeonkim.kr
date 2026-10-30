@@ -15,12 +15,44 @@
   ],
   "rewrites": [
     {
+      "source": "/presentations/assets/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/assets/:path*"
+    },
+    {
+      "source": "/presentations/slides/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/slides/:path*"
+    },
+    {
+      "source": "/presentations/thumbnails/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/thumbnails/:path*"
+    },
+    {
+      "source": "/presentations/media/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/media/:path*"
+    },
+    {
+      "source": "/presentations/previews/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/previews/:path*"
+    },
+    {
+      "source": "/presentations/decks/:path*",
+      "destination": "https://presentation-wine-ten.vercel.app/presentations/decks/:path*"
+    },
+    {
+      "source": "/presentations/api/capture/",
+      "destination": "https://presentation-wine-ten.vercel.app/api/capture/"
+    },
+    {
+      "source": "/presentations/audio-morphology.html",
+      "destination": "https://presentation-wine-ten.vercel.app/audio-morphology.html"
+    },
+    {
       "source": "/presentations/:path*",
-      "destination": "https://presentation-wine-ten.vercel.app/presentations/:path*"
+      "destination": "https://presentation-wine-ten.vercel.app/index.html"
     },
     {
       "source": "/presentations/:path*/",
-      "destination": "https://presentation-wine-ten.vercel.app/presentations/:path*/"
+      "destination": "https://presentation-wine-ten.vercel.app/index.html"
     }
   ]
 }
